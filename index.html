@@ -2106,7 +2106,7 @@
   ];
 
   function renderPackList() {
-    const checked = JSON.parse(store.get('cm_pack', '[]'));
+    const checked = (function(){ try { return JSON.parse(store.get('cm_pack','[]')); } catch(e){ store.set('cm_pack','[]'); return []; } })();
     const list = document.getElementById('pack-list');
     list.innerHTML = packItems.map((item, i) => `
       <div class="pack-item ${checked.includes(i) ? 'checked' : ''}" onclick="togglePack(${i})">
@@ -2120,7 +2120,7 @@
   }
 
   function togglePack(i) {
-    let checked = JSON.parse(store.get('cm_pack', '[]'));
+    let checked = (function(){ try { return JSON.parse(store.get('cm_pack','[]')); } catch(e){ store.set('cm_pack','[]'); return []; } })();
     if (checked.includes(i)) checked = checked.filter(x => x !== i);
     else checked.push(i);
     store.set('cm_pack', JSON.stringify(checked));
