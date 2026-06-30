@@ -725,10 +725,11 @@
           <span id="loc-label">距離</span>
         </button>
       </div>
-      <div class="header-date">
-        <div style="color:var(--gold);font-size:0.75rem" id="trip-days-left"></div>
-        <div>準備出發 ✈</div>
+      <div class="header-date" style="cursor:pointer" onclick="openDatePicker()" title="點擊設定出發日期">
+        <div style="color:var(--gold);font-size:0.75rem" id="trip-days-left">點擊設定出發日期</div>
+        <div id="trip-date-display">準備出發 ✈</div>
       </div>
+      <input type="date" id="trip-date-input" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" onchange="saveTripDate(this.value)">
     </div>
   </div>
 </div>
@@ -1898,8 +1899,44 @@
   }
   setWeather();
 
-  // TRIP DAYS
-  document.getElementById('trip-days-left').textContent = '出發前請設定日期';
+  // DEPARTURE DATE
+  function openDatePicker() {
+    var input = document.getElementById('trip-date-input');
+    var saved = store.get('cm_date', '');
+    if (saved) input.value = saved;
+    input.style.pointerEvents = 'auto';
+    input.click();
+    input.style.pointerEvents = 'none';
+  }
+
+  function saveTripDate(val) {
+    store.set('cm_date', val);
+    updateDaysLeft();
+  }
+
+  function updateDaysLeft() {
+    var saved = store.get('cm_date', '');
+    var leftEl = document.getElementById('trip-days-left');
+    var dateEl = document.getElementById('trip-date-display');
+    if (!saved) {
+      leftEl.textContent = '點擊設定出發日期';
+      if (dateEl) dateEl.textContent = '準備出發 ✈';
+      return;
+    }
+    var dep = new Date(saved);
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    dep.setHours(0,0,0,0);
+    var diff = Math.round((dep - today) / 86400000);
+    var m = dep.getMonth() + 1;
+    var d = dep.getDate();
+    if (dateEl) dateEl.textContent = m + '/' + d + ' 出發 ✈';
+    if (diff > 0) leftEl.textContent = '還有 ' + diff + ' 天出發';
+    else if (diff === 0) leftEl.textContent = '🎉 今天出發！';
+    else leftEl.textContent = '旅途中 +' + Math.abs(diff) + 'd';
+  }
+
+  updateDaysLeft();
 
   // GEOLOCATION
   function haversine(lat1, lng1, lat2, lng2) {
@@ -2303,8 +2340,9 @@
     ml.className = 'place-map';
     var lat = card.getAttribute('data-lat');
     var lng = card.getAttribute('data-lng');
+    // Use name+coordinates so Google Maps shows the label, not just a pin
     ml.href = (lat && lng)
-      ? 'https://maps.google.com/?q=' + lat + ',' + lng
+      ? 'https://maps.google.com/?q=' + encodeURIComponent(name + ' Chiang Mai') + '&ll=' + lat + ',' + lng
       : 'https://maps.google.com/?q=Chiang+Mai+' + encodeURIComponent(name);
     ml.target = '_blank';
     ml.rel = 'noopener';
