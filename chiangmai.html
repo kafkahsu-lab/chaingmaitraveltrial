@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>清邁旅遊手冊</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0F0D09;
+    --surface: #1C1812;
+    --surface-2: #252018;
+    --surface-3: #2E2920;
+    --gold: #C8942A;
+    --gold-light: #E4B84A;
+    --gold-dim: #7A5A18;
+    --orange: #D4622A;
+    --green: #3A6B37;
+    --green-light: #5A9B57;
+    --teal: #4A9490;
+    --red: #B84040;
+    --text: #F0E8D5;
+    --text-muted: #9A8E78;
+    --text-dim: #5A5040;
+    --border: #3A3020;
+    --border-light: #4A4030;
+    font-size: 15px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 72px;
+  }
+
+  /* HEADER */
+  .app-header {
+    padding: 20px 20px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .app-header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 16px;
+  }
+  .app-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .app-title span {
+    display: block;
+    font-size: 0.7rem;
+    font-family: system-ui, sans-serif;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  .header-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    z-index: 200;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 10px 4px 8px;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    transition: color 0.15s;
+    border: none;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-item.active { color: var(--gold); }
+  .nav-item svg { width: 22px; height: 22px; }
+  .nav-item:focus-visible { outline: 2px solid var(--gold); }
+
+  /* TABS / SECTIONS */
+  .section { display: none; padding: 0 0 20px; }
+  .section.active { display: block; }
+
+  /* OVERVIEW */
+  .overview-hero {
+    background: linear-gradient(to bottom, #1A1509, var(--bg));
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .trip-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .stat-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .stat-card .val {
+    font-size: 1.5rem;
+    font-family: Georgia, serif;
+    color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .stat-card .lbl {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .weather-bar {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .weather-icon { font-size: 2rem; }
+  .weather-info { flex: 1; }
+  .weather-info .season {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .weather-info .desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .weather-temp {
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    color: var(--text-muted);
+  }
+
+  .section-title {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    padding: 18px 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tip-list { padding: 0 20px; display: flex; flex-direction: column; gap: 8px; }
+  .tip-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .tip-body { flex: 1; }
+  .tip-body strong { font-size: 0.85rem; color: var(--text); display: block; margin-bottom: 2px; }
+  .tip-body span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+  /* ITINERARY */
+  .day-block { padding: 0 20px 4px; }
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 0 10px;
+  }
+  .day-num {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    color: var(--gold-dim);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .day-label { font-size: 0.9rem; color: var(--text); font-weight: 600; }
+  .day-sub { font-size: 0.75rem; color: var(--text-muted); }
+
+  .place-list { display: flex; flex-direction: column; gap: 6px; }
+  .place-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .place-item.temple { border-left-color: var(--gold); }
+  .place-item.nature { border-left-color: var(--green); }
+  .place-item.food { border-left-color: var(--orange); }
+  .place-item.market { border-left-color: var(--teal); }
+  .place-item.activity { border-left-color: #9B6FC8; }
+  .place-item.hidden { border-left-color: #4A7A8A; }
+
+  .local-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background: #1A3020;
+    color: var(--green-light);
+    border: 1px solid #2A5030;
+    letter-spacing: 0.04em;
+    margin-left: 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .dist-badge {
+    display: none;
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: #0F1A20;
+    color: var(--teal);
+    border: 1px solid #1A3A40;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    margin-left: 4px;
+  }
+  .dist-badge.near {
+    background: #0A1F10;
+    color: var(--green-light);
+    border-color: #1A4020;
+  }
+  .dist-badge.visible { display: inline-block; }
+
+  .loc-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-light);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .loc-btn:hover, .loc-btn.active { border-color: var(--teal); color: var(--teal); }
+  .loc-btn:focus-visible { outline: 2px solid var(--teal); }
+  .loc-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .loc-btn.loading { opacity: 0.6; pointer-events: none; }
+
+  .food-card-header { display: flex; align-items: flex-start; gap: 14px; width: 100%; }
+  .food-card-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+
+  /* MOOD TAGS */
+  .mood-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .mood-tag { font-size: 0.62rem; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.03em; border: 1px solid; }
+  .mood-tag.quiet  { background:#0D1620; color:#6EB4D4; border-color:#1A3A50; }
+  .mood-tag.history{ background:#1A1408; color:#C8942A; border-color:#3A2A0A; }
+  .mood-tag.nature { background:#0A1A0A; color:#5A9B57; border-color:#1A4020; }
+  .mood-tag.local  { background:#1A0E08; color:#D4622A; border-color:#4A2010; }
+  .mood-tag.solo   { background:#150D20; color:#9B7FD4; border-color:#2A1A40; }
+  .mood-tag.ethical{ background:#081818; color:#4A9490; border-color:#0A3030; }
+
+  /* MOOD FILTER */
+  .mood-filter { display:flex; gap:6px; padding:10px 20px; overflow-x:auto; scrollbar-width:none; }
+  .mood-filter::-webkit-scrollbar { display:none; }
+  .mood-filter-btn { flex-shrink:0; padding:5px 12px; border-radius:16px; border:1px solid var(--border); background:transparent; color:var(--text-muted); font-size:0.72rem; cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
+  .mood-filter-btn.active { background:var(--surface-2); border-color:var(--border-light); color:var(--text); }
+  .mood-filter-btn:focus-visible { outline:2px solid var(--gold); }
+
+  /* PLAN SUB-TABS */
+  .plan-subtabs { display:flex; gap:0; margin:10px 20px 0; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .plan-subtab { flex:1; padding:9px; text-align:center; font-size:0.8rem; cursor:pointer; background:transparent; border:none; color:var(--text-muted); transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
+  .plan-subtab.active { background:var(--surface-2); color:var(--gold); font-weight:600; }
+
+  /* STAR / FAVORITE */
+  .fav-btn { background:none; border:none; font-size:1rem; cursor:pointer; color:var(--text-dim); transition:color 0.15s; line-height:1; padding:6px 8px; min-width:36px; min-height:36px; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; flex-shrink:0; }
+  .fav-btn.active { color:#E4B84A; }
+  /* place items: pull ☆ to the end of the flex row, after 地圖↗ */
+  .place-item { position:relative; }
+  .place-item .fav-btn { order:10; align-self:flex-start; padding:4px 6px; min-width:30px; min-height:30px; }
+  .place-item .place-map { order:9; align-self:flex-start; padding:6px 4px; }
+  /* card actions row inside food-body */
+  .food-actions { display:flex; align-items:center; gap:6px; margin-top:8px; }
+  .food-actions .fav-btn { padding:4px 6px; min-width:30px; min-height:30px; font-size:0.9rem; }
+  .food-actions .place-map { font-size:0.72rem; padding:4px 8px; border:1px solid var(--border-light); border-radius:8px; }
+
+  /* DAY PICKER */
+  .day-picker { display:none; position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:var(--surface-2); border:1px solid var(--border-light); border-radius:12px; padding:14px 16px; z-index:400; width:280px; box-shadow:0 8px 32px rgba(0,0,0,0.6); }
+  .day-picker.show { display:block; }
+  .day-picker-title { font-size:0.75rem; color:var(--text-muted); margin-bottom:10px; text-align:center; }
+  .day-picker-name { font-size:0.88rem; color:var(--text); margin-bottom:12px; text-align:center; font-weight:600; }
+  .day-picker-days { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+  .day-picker-btn { padding:7px 14px; border-radius:8px; border:1px solid var(--border-light); background:transparent; color:var(--text-muted); font-size:0.8rem; cursor:pointer; transition:all 0.15s; }
+  .day-picker-btn:hover, .day-picker-btn.sel { background:var(--gold); border-color:var(--gold); color:var(--bg); font-weight:600; }
+  .day-picker-overlay { display:none; position:fixed; inset:0; z-index:390; }
+  .day-picker-overlay.show { display:block; }
+
+  /* MY LIST VIEW */
+  .my-list-empty { text-align:center; padding:40px 20px; color:var(--text-dim); font-size:0.85rem; line-height:1.8; }
+  .my-list-day-group { padding:0 20px 4px; }
+  .my-list-day-title { font-family:Georgia,serif; font-size:0.85rem; color:var(--gold); padding:14px 0 8px; border-bottom:1px solid var(--border); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+  .my-list-item { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 14px 10px 12px; display:flex; align-items:center; gap:10px; margin-bottom:6px; position:relative; }
+  .my-list-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .my-list-name { flex:1; font-size:0.85rem; color:var(--text); }
+  .my-list-type { font-size:0.7rem; color:var(--text-dim); }
+  .my-list-del { background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:0.9rem; padding:2px 4px; }
+  .my-list-del:hover { color:var(--red); }
+  .my-list-day-btn { font-size:0.65rem; padding:2px 8px; border-radius:8px; background:var(--surface-3); border:1px solid var(--border-light); color:var(--text-muted); cursor:pointer; }
+
+  /* STORY */
+  .story-wrap { margin-top:8px; }
+  .story-toggle { font-size:0.7rem; color:var(--gold-dim); background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center; gap:4px; -webkit-tap-highlight-color:transparent; }
+  .story-toggle:hover { color:var(--gold); }
+  .story-toggle .arrow { transition:transform 0.2s; display:inline-block; }
+  .story-toggle.open .arrow { transform:rotate(90deg); }
+  .story-content { display:none; margin-top:8px; padding:10px 12px; background:var(--surface-3); border-left:2px solid var(--gold-dim); border-radius:0 6px 6px 0; font-size:0.76rem; color:var(--text-muted); line-height:1.6; }
+  .story-content.show { display:block; }
+  .story-ja { margin-top:8px; padding-top:8px; border-top:1px solid var(--border); font-size:0.74rem; color:#7A8A7A; line-height:1.6; }
+
+  /* JP DESC */
+  .desc-ja { display:none; font-size:0.74rem; color:#7A8A7A; margin-top:4px; line-height:1.45; font-style:italic; }
+  body.show-ja .desc-ja { display:block; }
+  .lang-toggle { font-size:0.7rem; padding:4px 10px; border-radius:12px; border:1px solid var(--border-light); background:transparent; color:var(--text-dim); cursor:pointer; transition:all 0.15s; }
+  .lang-toggle.active { border-color:#7A8A7A; color:#7A8A7A; background:#0A100A; }
+
+  .place-time { font-size: 0.7rem; color: var(--text-dim); width: 38px; flex-shrink: 0; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .place-body { flex: 1; }
+  .place-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .place-name-th { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+  .place-desc { font-size: 0.76rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+  .place-map {
+    font-size: 0.7rem;
+    color: var(--gold);
+    text-decoration: none;
+    flex-shrink: 0;
+    padding: 3px 0;
+  }
+  .place-map:hover { color: var(--gold-light); }
+
+  .day-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0 0;
+  }
+
+  /* FOOD */
+  .food-filter {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .food-filter::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .filter-btn:focus-visible { outline: 2px solid var(--gold); }
+
+  .food-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+  .food-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .food-card[data-cat] { display: none; }
+  .food-card.show { display: flex; }
+  .food-emoji { font-size: 1.8rem; flex-shrink: 0; }
+  .food-body { flex: 1; }
+  .food-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+  .food-name-th { font-size: 0.75rem; color: var(--text-muted); }
+  .food-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; line-height: 1.45; }
+  .food-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag {
+    font-size: 0.66rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .tag.must { border-color: var(--gold-dim); color: var(--gold); }
+  .tag.spicy { border-color: #7A2A0A; color: var(--orange); }
+  .tag.sweet { border-color: #3A2A6A; color: #9B7FD4; }
+  .tag.veg { border-color: #1A4A1A; color: var(--green-light); }
+
+  .food-price { font-size: 0.78rem; color: var(--text-muted); flex-shrink: 0; }
+  .price-dot { color: var(--gold); }
+
+  /* BUDGET */
+  .budget-summary {
+    margin: 16px 20px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .budget-total-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .budget-total-val {
+    font-family: Georgia, serif;
+    font-size: 2.2rem;
+    color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    margin-top: 2px;
+  }
+  .budget-total-val span { font-size: 1rem; color: var(--text-muted); }
+  .budget-bars { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .budget-bar-row { display: flex; align-items: center; gap: 10px; }
+  .budget-bar-label { font-size: 0.75rem; color: var(--text-muted); width: 48px; }
+  .budget-bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--surface-3);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .budget-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .budget-bar-amt { font-size: 0.75rem; color: var(--text-muted); width: 52px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .converter-box {
+    margin: 12px 20px 0;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .converter-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 12px; }
+  .converter-row { display: flex; gap: 10px; align-items: center; }
+  .converter-input-wrap { flex: 1; position: relative; }
+  .converter-label { font-size: 0.65rem; color: var(--text-dim); margin-bottom: 4px; letter-spacing: 0.06em; }
+  .converter-input {
+    width: 100%;
+    background: var(--surface-3);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+    outline: none;
+  }
+  .converter-input:focus { border-color: var(--gold); }
+  .converter-arrow { color: var(--gold); font-size: 1.2rem; flex-shrink: 0; }
+  .rate-note { font-size: 0.7rem; color: var(--text-dim); margin-top: 8px; }
+
+  .expense-form {
+    margin: 12px 20px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .expense-form-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 12px; }
+  .form-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .form-input {
+    flex: 1;
+    background: var(--surface-3);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 0.88rem;
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-select {
+    background: var(--surface-3);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 0.88rem;
+    outline: none;
+    width: 100px;
+  }
+  .form-select:focus { border-color: var(--gold); }
+  .btn-add {
+    width: 100%;
+    padding: 11px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .btn-add:hover { background: var(--gold-light); }
+  .btn-add:focus-visible { outline: 2px solid var(--gold-light); }
+
+  .expense-list { padding: 0 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .expense-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .expense-cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .expense-desc { flex: 1; font-size: 0.85rem; color: var(--text); }
+  .expense-amt { font-size: 0.88rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .expense-del { background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 2px 4px; font-size: 0.9rem; }
+  .expense-del:hover { color: var(--red); }
+
+  /* CHEATSHEET */
+  .phrase-cat { padding: 0 20px; margin-bottom: 8px; }
+  .phrase-cat-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    padding: 14px 0 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .phrase-grid { display: flex; flex-direction: column; gap: 6px; }
+  .phrase-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .phrase-item:active { border-color: var(--gold); }
+  .phrase-zh { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+  .phrase-th { font-size: 0.85rem; color: var(--gold); }
+  .phrase-rom { font-size: 0.75rem; color: var(--text-muted); padding-top: 2px; }
+  .phrase-copied {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface-2);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 300;
+  }
+  .phrase-copied.show { opacity: 1; }
+
+  .info-grid { padding: 0 20px; display: flex; flex-direction: column; gap: 6px; }
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .info-card-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 8px; }
+  .info-row { display: flex; justify-content: space-between; align-items: baseline; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { font-size: 0.8rem; color: var(--text-muted); }
+  .info-val { font-size: 0.82rem; color: var(--text); font-weight: 500; }
+  .info-val a { color: var(--teal); text-decoration: none; }
+
+  /* PACK LIST */
+  .pack-list { padding: 0 20px; display: flex; flex-direction: column; gap: 6px; }
+  .pack-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pack-item.checked { opacity: 0.45; }
+  .pack-check {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--border-light);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .pack-item.checked .pack-check {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .pack-item.checked .pack-check::after { content: '✓'; font-size: 0.7rem; color: white; }
+  .pack-name { font-size: 0.85rem; color: var(--text); }
+  .pack-note { font-size: 0.72rem; color: var(--text-muted); margin-left: auto; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-header">
+  <div class="app-header-top">
+    <div class="app-title">
+      清邁
+      <span>CHIANG MAI TRAVEL GUIDE</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="lang-toggle" onclick="toggleJa()">🇯🇵 JP</button>
+        <button class="loc-btn" id="loc-btn" onclick="locateMe()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8" stroke-dasharray="2 2"/></svg>
+          <span id="loc-label">距離</span>
+        </button>
+      </div>
+      <div class="header-date">
+        <div style="color:var(--gold);font-size:0.75rem" id="trip-days-left"></div>
+        <div>準備出發 ✈</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+
+<!-- 1. OVERVIEW -->
+<div class="section active" id="sec-home">
+  <div class="overview-hero">
+    <div style="font-family:Georgia,serif;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">北泰古城 ● 海拔 310m</div>
+    <div style="font-family:Georgia,serif;font-size:1.15rem;color:var(--text);line-height:1.5;max-width:320px">
+      蘭納王朝的千年古都，寺廟、叢林、<br>夜市與咖啡香交織的南亞慢活之城。
+    </div>
+    <div class="trip-stats">
+      <div class="stat-card">
+        <div class="val" id="stat-days">5</div>
+        <div class="lbl">天行程</div>
+      </div>
+      <div class="stat-card">
+        <div class="val" id="stat-favs">0</div>
+        <div class="lbl">已收藏</div>
+      </div>
+      <div class="stat-card">
+        <div class="val" id="stat-days-filled">0</div>
+        <div class="lbl">天已排定</div>
+      </div>
+    </div>
+    <div id="stat-progress" style="margin:8px 0 0;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:none">
+      <div id="stat-progress-bar" style="height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s;width:0%"></div>
+    </div>
+  </div>
+
+  <div class="weather-bar">
+    <div class="weather-icon" id="wx-icon">⛅</div>
+    <div class="weather-info">
+      <div class="season" id="wx-season">涼季</div>
+      <div class="desc" id="wx-desc">11月–2月最宜人，白天25°C，夜晚涼爽。是旅遊旺季，建議提早訂房。</div>
+    </div>
+    <div class="weather-temp" id="wx-temp">25°</div>
+  </div>
+
+  <div class="section-title">必知資訊</div>
+  <div class="tip-list">
+    <div class="tip-item">
+      <div class="tip-icon">💱</div>
+      <div class="tip-body">
+        <strong>換錢建議</strong>
+        <span>機場匯率差，建議在市區 SuperRich 或 Kasikorn Bank 換。1 TWD ≈ 1.1 THB（參考）。</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🛺</div>
+      <div class="tip-body">
+        <strong>交通</strong>
+        <span>市區搭 Grab 最方便，紅色雙排車（Song Thaew）固定路線便宜，摩托計程車需議價。</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🙏</div>
+      <div class="tip-body">
+        <strong>寺廟禮儀</strong>
+        <span>進寺廟需脫鞋、衣著覆蓋肩膀與膝蓋。白象寺（Wat Rong Khun）需付門票。</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">💧</div>
+      <div class="tip-body">
+        <strong>飲食安全</strong>
+        <span>自來水不可生飲，街頭冰塊通常安全。辣度「mai phet」（不辣）記得說。</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">📶</div>
+      <div class="tip-body">
+        <strong>網路 SIM 卡</strong>
+        <span>機場入境大廳買 True Move H 或 AIS，30天無限流量 ≈ 299 THB。</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🏥</div>
+      <div class="tip-body">
+        <strong>緊急聯絡</strong>
+        <span>旅遊警察：1155｜救護車：1669｜Ram Hospital（近 Nimman）：+66 53 920 300</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. ITINERARY -->
+<div class="section" id="sec-plan">
+
+  <div class="plan-subtabs">
+    <button class="plan-subtab active" onclick="switchPlanTab('default',this)">預設行程</button>
+    <button class="plan-subtab" onclick="switchPlanTab('mylist',this)">⭐ 我的清單</button>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:8px 20px 0;font-size:0.8rem;color:var(--text-muted)">
+    <span>旅行天數</span>
+    <button onclick="setTripDays(-1)" style="width:26px;height:26px;border-radius:50%;border:1px solid var(--border-light);background:transparent;color:var(--text-muted);font-size:1rem;cursor:pointer;line-height:1">−</button>
+    <span id="trip-days-display" style="font-weight:700;color:var(--gold);min-width:18px;text-align:center">5</span>
+    <button onclick="setTripDays(1)" style="width:26px;height:26px;border-radius:50%;border:1px solid var(--border-light);background:transparent;color:var(--text-muted);font-size:1rem;cursor:pointer;line-height:1">+</button>
+    <span>天</span>
+  </div>
+
+  <!-- MY LIST VIEW -->
+  <div id="my-list-view" style="display:none;padding-bottom:8px">
+    <div id="my-list-content"></div>
+  </div>
+
+  <!-- DEFAULT ITINERARY -->
+  <div id="default-plan-view">
+  <div style="padding:8px 20px 0;font-size:0.72rem;color:var(--text-dim);line-height:1.6">
+    <span style="color:var(--green-light)">●</span> 在地推薦 &nbsp;|&nbsp; ⭐ 收藏並排入行程 &nbsp;|&nbsp; ▶ 展開地方故事
+  </div>
+
+  <div class="mood-filter">
+    <button class="mood-filter-btn active" onclick="filterMood('all',this)">全部</button>
+    <button class="mood-filter-btn" onclick="filterMood('quiet',this)">🤫 靜思型</button>
+    <button class="mood-filter-btn" onclick="filterMood('history',this)">🕯 歷史感</button>
+    <button class="mood-filter-btn" onclick="filterMood('nature',this)">🌿 自然系</button>
+    <button class="mood-filter-btn" onclick="filterMood('local',this)">🏮 在地人</button>
+    <button class="mood-filter-btn" onclick="filterMood('solo',this)">🧘 獨處向</button>
+    <button class="mood-filter-btn" onclick="filterMood('ethical',this)">💚 倫理性</button>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-num">01</div>
+      <div>
+        <div class="day-label">古城深度漫遊</div>
+        <div class="day-sub">Old City · 早市 · 巷弄 · 夜市</div>
+      </div>
+    </div>
+    <div class="place-list">
+      <div class="place-item food" data-lat="18.7758" data-lng="98.9871" data-moods="local quiet">
+        <button class="fav-btn" onclick="openDayPicker(this,'Pratu晨市','place')">☆</button>
+        <div class="place-time">07:00</div>
+        <div class="place-body">
+          <div class="place-name">Pratu Chiang Mai 晨市<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ตลาดประตูเชียงใหม่</div>
+          <div class="place-desc">古城南門外的傳統早市，當地人買菜買早餐的地方。豬肉串烤（Moo Ping）配糯米飯是清邁人的經典早餐，20 THB 就吃飽。觀光客幾乎不來。</div>
+          <div class="desc-ja">旧市街南門外の伝統的な朝市。地元の人が野菜や朝食を買いに来る生活の場。豚串焼き（ムーピン）ともち米のセットが定番朝食で20バーツほど。観光客はほぼ来ない穴場。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Pratu+Chiang+Mai+Market" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item temple" data-lat="18.7870" data-lng="98.9862" data-moods="history quiet">
+        <button class="fav-btn" onclick="openDayPicker(this,'柴迪龍寺','place')">☆</button>
+        <div class="place-time">09:00</div>
+        <div class="place-body">
+          <div class="place-name">柴迪龍寺<span class="dist-badge"></span></div>
+          <div class="place-name-th">วัดเจดีย์หลวง · Wat Chedi Luang</div>
+          <div class="place-desc">15世紀蘭納王朝最大佛塔，早晨光線從東邊打入，氣氛莊嚴。有僧侶交流（Monk Chat）活動，可免費對話。</div>
+          <div class="desc-ja">15世紀ランナー王朝最大の仏塔。朝の光が差し込む厳かな空間。托鉢の僧侶と無料で対話できる「モンクチャット」も体験できる。</div>
+          <div class="mood-tags"><span class="mood-tag history">🕯 歷史感</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+          <div class="story-wrap">
+            <button class="story-toggle" onclick="toggleStory(this)"><span class="arrow">▶</span> 地方故事</button>
+            <div class="story-content">建於1391年，高達82公尺的佛塔一度是清邁最高建築。傳說翡翠佛（今存於曼谷玉佛寺）曾在此供奉長達84年。1545年地震損毀了上層塔尖，至今未完全修復——那道裂縫比任何完整建築都更有故事。<div class="story-ja">1391年建立、82mの仏塔はかつてチェンマイで最も高い建造物。エメラルド仏（現在バンコクの玉仏寺に安置）がここに84年間祀られていたという伝説がある。1545年の地震で上部が崩れ今も未修復。その傷が、完璧な建築よりも深い物語を語る。</div></div>
+          </div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Wat+Chedi+Luang+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.7876" data-lng="98.9820" data-moods="history quiet solo local">
+        <button class="fav-btn" onclick="openDayPicker(this,'帕崩寺','place')">☆</button>
+        <div class="place-time">10:30</div>
+        <div class="place-body">
+          <div class="place-name">帕崩寺（不用門票）<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">วัดพระเจ้าเม็งราย · Wat Phra Chao Mengrai</div>
+          <div class="place-desc">距帕辛寺步行 5 分鐘，幾乎沒有觀光客的古寺。供奉清邁開城者孟萊王，老住持常在院內打坐，氛圍比主流景點安靜十倍。</div>
+          <div class="desc-ja">ワット・プラシンから徒歩5分、観光客がほぼ来ない古刹。チェンマイ創設者マンラーイ王を祀る。老住職が境内で坐禅する姿に出会えることも。ガイドブック未掲載の静寂の空間。</div>
+          <div class="mood-tags"><span class="mood-tag history">🕯 歷史感</span><span class="mood-tag quiet">🤫 靜思型</span><span class="mood-tag solo">🧘 獨處向</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Wat+Phra+Chao+Mengrai+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item temple" data-lat="18.7876" data-lng="98.9817" data-moods="history">
+        <button class="fav-btn" onclick="openDayPicker(this,'帕辛寺','place')">☆</button>
+        <div class="place-time">11:30</div>
+        <div class="place-body">
+          <div class="place-name">帕辛寺<span class="dist-badge"></span></div>
+          <div class="place-name-th">วัดพระสิงห์ · Wat Phra Singh</div>
+          <div class="place-desc">清邁最受尊崇的寺廟，蘭納式建築精美，Viharn Lai Kham 內的壁畫是泰北珍寶。</div>
+          <div class="desc-ja">チェンマイで最も信仰される寺院。ランナー様式の建築が美しく、内部の壁画は北タイ芸術の至宝。</div>
+          <div class="mood-tags"><span class="mood-tag history">🕯 歷史感</span></div>
+          <div class="story-wrap">
+            <button class="story-toggle" onclick="toggleStory(this)"><span class="arrow">▶</span> 地方故事</button>
+            <div class="story-content">寺內供奉的「帕辛佛像」是清邁最神聖的文物，傳說在13世紀從斯里蘭卡漂洋過海而來。每年四月潑水節，人們會將佛像請出遊行，讓民眾灑水祈福——那是整年中清邁最熱鬧也最純粹的一天。<div class="story-ja">本堂に祀られる「プラ・シン仏」はチェンマイ最聖なる文化財。13世紀にスリランカから海を渡ってきたという伝説がある。毎年4月の水かけ祭りには仏像が街を練り歩き、人々が水をかけて祈る。一年で最も純粋な一日だ。</div></div>
+          </div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Wat+Phra+Singh+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item food" data-lat="18.7885" data-lng="98.9881" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Aroon Rai','place')">☆</button>
+        <div class="place-time">12:30</div>
+        <div class="place-body">
+          <div class="place-name">Aroon Rai 老字號北泰菜<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">อาหารอร่อยไร</div>
+          <div class="place-desc">1956年開業至今，清邁在地人公認的北泰家常菜代表。Nam Prik Noom（青辣椒醬）配炸豬皮、Gaeng Hang Lay（緬甸咖哩）必點。裝潢老舊但食物正宗。</div>
+          <div class="desc-ja">1956年創業のチェンマイ北タイ料理の老舗。地元民公認の本格派。青唐辛子ディップ（ナムプリック・ヌーム）と揚げ豚皮のセット、ビルマ風カレー（ゲーン・ハンレー）は必食。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Aroon+Rai+Restaurant+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.8006" data-lng="98.9867" data-moods="local solo quiet">
+        <button class="fav-btn" onclick="openDayPicker(this,'Santitham街區','place')">☆</button>
+        <div class="place-time">15:00</div>
+        <div class="place-body">
+          <div class="place-name">Santitham 街區漫步<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ย่านสันติธรรม</div>
+          <div class="place-desc">古城北邊的住宅區，清邁大學教職員與長住外國人聚集。巷弄裡有獨立書店、無招牌咖啡、街頭壁畫，完全不在觀光地圖上。</div>
+          <div class="desc-ja">旧市街北側の住宅街。大学教員と長期在住外国人が暮らすエリア。路地に独立書店、看板のないカフェ、壁画が点在。観光地図に載っていない。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag solo">🧘 獨處向</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Santitham+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item market" data-lat="18.7735" data-lng="98.9868" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Wualai週日夜市','place')">☆</button>
+        <div class="place-time">18:00</div>
+        <div class="place-body">
+          <div class="place-name">週日夜市步行街（週日限定）<span class="dist-badge"></span></div>
+          <div class="place-name-th">ถนนวัวลาย · Wualai Walking St.</div>
+          <div class="place-desc">清邁銀器產地，工匠攤位和手工藝品比觀光夜市便宜三成。當地家庭也會來逛，氣氛完全不同於 Night Bazaar。</div>
+          <div class="desc-ja">銀器の産地。職人の屋台と手工芸品は観光夜市より3割安い。地元家族も来る、Night Bazaarとは全く異なる雰囲気。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Wualai+Road+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+    </div>
+    <div class="day-divider"></div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-num">02</div>
+      <div>
+        <div class="day-label">素帖山 · 湖邊 · 尼曼</div>
+        <div class="day-sub">Doi Suthep · Huay Tung Tao · Nimman</div>
+      </div>
+    </div>
+    <div class="place-list">
+      <div class="place-item temple" data-lat="18.8048" data-lng="98.9217" data-moods="history nature">
+        <button class="fav-btn" onclick="openDayPicker(this,'素帖寺','place')">☆</button>
+        <div class="place-time">07:00</div>
+        <div class="place-body">
+          <div class="place-name">素帖寺（山頂）<span class="dist-badge"></span></div>
+          <div class="place-name-th">วัดพระธาตุดอยสุเทพ</div>
+          <div class="place-desc">清邁守護神廟，爬309階或搭纜車，俯瞰全城。早晨雲霧最美，08:00前幾乎只有當地信徒來朝拜。</div>
+          <div class="desc-ja">チェンマイの守護神を祀る山頂の寺院。309段の階段かケーブルカーで参拝。早朝は雲海が美しく、地元の信者しかいない時間帯がある。</div>
+          <div class="mood-tags"><span class="mood-tag history">🕯 歷史感</span><span class="mood-tag nature">🌿 自然系</span></div>
+          <div class="story-wrap">
+            <button class="story-toggle" onclick="toggleStory(this)"><span class="arrow">▶</span> 地方故事</button>
+            <div class="story-content">14世紀，一頭白象馱著神聖舍利，從清邁城出發，登上素帖山後在此轉圈三次並長鳴，被認為是選址的神聖指示。寺廟從此建立，成為清邁人心中永遠的精神座標。每逢整點，山頂鐘聲傳遍山谷，那聲音裡裝著七百年的記憶。<div class="story-ja">14世紀、白い象が聖なる仏舎利を背負い、チェンマイを出発して山を登り、3回円を描いて咆哮した。これが聖地の指示と解釈され寺院が建てられた。毎正時に山頂の鐘が鳴り響く。その音には700年の記憶が宿っている。</div></div>
+          </div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Doi+Suthep+Temple+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.8030" data-lng="98.9200" data-moods="nature quiet solo local">
+        <button class="fav-btn" onclick="openDayPicker(this,'素帖瀑布','place')">☆</button>
+        <div class="place-time">10:00</div>
+        <div class="place-body">
+          <div class="place-name">素帖國家公園瀑布<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">น้ำตกดอยสุเทพ · Doi Suthep Waterfall</div>
+          <div class="place-desc">距山頂寺廟 3km，清邁大學生週末健行的祕境。需入場費 100 THB，雨季水量充沛，涼季步道清晰易走。幾乎不在旅遊手冊上。</div>
+          <div class="desc-ja">山頂寺院から3km、チェンマイ大学生が週末にハイキングする秘境。入場料100バーツ。雨季は水量豊富、乾季はトレイルが歩きやすい。ガイドブックにほぼ載っていない。</div>
+          <div class="mood-tags"><span class="mood-tag nature">🌿 自然系</span><span class="mood-tag quiet">🤫 靜思型</span><span class="mood-tag solo">🧘 獨處向</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Doi+Suthep+Waterfall+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item nature" data-lat="18.8267" data-lng="98.9267" data-moods="nature local quiet">
+        <button class="fav-btn" onclick="openDayPicker(this,'懷通濤水庫','place')">☆</button>
+        <div class="place-time">13:00</div>
+        <div class="place-body">
+          <div class="place-name">懷通濤水庫湖邊午餐<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">อ่างเก็บน้ำห้วยตึงเฒ่า</div>
+          <div class="place-desc">清邁人週末度假的後花園。湖邊竹棚餐廳，在水上座位點烤魚、炒空心菜，配冰啤酒看山景。費用極低，風景比任何觀光餐廳都好。</div>
+          <div class="desc-ja">チェンマイ人が週末に訪れる「地元の秘密の庭」。湖畔の竹棚レストランで水上席に座り、焼き魚や炒め空芯菜をビールと共に。どの観光レストランより景色が素晴らしく料金も安い。</div>
+          <div class="mood-tags"><span class="mood-tag nature">🌿 自然系</span><span class="mood-tag local">🏮 在地人</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Huay+Tung+Tao+Lake+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item food" data-lat="18.7960" data-lng="98.9673" data-moods="local solo">
+        <button class="fav-btn" onclick="openDayPicker(this,'尼曼路咖啡','place')">☆</button>
+        <div class="place-time">16:00</div>
+        <div class="place-body">
+          <div class="place-name">尼曼路咖啡探店<span class="dist-badge"></span></div>
+          <div class="place-name-th">ถนนนิมมานเหมินท์</div>
+          <div class="place-desc">推薦 Ristr8to Lab（競賽級咖啡師）或 Ponganes Espresso（Soi 9，當地人常去的小館）。避開一樓商場型咖啡，往巷弄裡走。</div>
+          <div class="desc-ja">Ristr8to Lab（コンペ受賞バリスタ）かPonganes Espresso（Soi 9の路地奥）がおすすめ。大通り沿いの商業系カフェは避けて路地へ。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag solo">🧘 獨處向</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Nimman+Road+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.7958" data-lng="98.9661" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Nimman Soi7炒河粉','place')">☆</button>
+        <div class="place-time">19:30</div>
+        <div class="place-body">
+          <div class="place-name">Nimman Soi 7 深夜炒河粉<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ผัดไทยซอย 7</div>
+          <div class="place-desc">一輛無名炒河粉推車，晚上7點出現、賣完即收。尼曼路住戶的深夜食堂，價格 50 THB，排隊才是訂位方式。</div>
+          <div class="desc-ja">夜7時に現れ、売り切れ次第終了の無名屋台。地元ニマン住民の深夜食堂。50バーツ、並ぶことが唯一の予約方法。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Nimman+Soi+7+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+    </div>
+    <div class="day-divider"></div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-num">03</div>
+      <div>
+        <div class="day-label">大象保護區</div>
+        <div class="day-sub">Elephant Nature Park · 全日</div>
+      </div>
+    </div>
+    <div class="place-list">
+      <div class="place-item activity" data-lat="19.0833" data-lng="98.9167" data-moods="nature ethical">
+        <button class="fav-btn" onclick="openDayPicker(this,'大象自然公園','place')">☆</button>
+        <div class="place-time">全天</div>
+        <div class="place-body">
+          <div class="place-name">大象自然公園<span class="dist-badge"></span></div>
+          <div class="place-name-th">Elephant Nature Park</div>
+          <div class="place-desc">倡導不騎乘的倫理大象體驗，餵食、洗澡、在河邊觀察。需提前網路預訂，約 2,500 THB/人。早上07:30接送從市區出發。</div>
+          <div class="desc-ja">乗馬をしない倫理的な象との触れ合い体験。餌やり・水浴び・川辺での観察。要事前予約、約2,500バーツ/人。朝7:30に市内からピックアップ。</div>
+          <div class="mood-tags"><span class="mood-tag nature">🌿 自然系</span><span class="mood-tag ethical">💚 倫理性</span></div>
+          <div class="story-wrap">
+            <button class="story-toggle" onclick="toggleStory(this)"><span class="arrow">▶</span> 地方故事</button>
+            <div class="story-content">創辦人 Lek Chailert 從小看著大象被虐待卻無能為力，1996年用全部積蓄買下一頭受傷的象，後來一頭又一頭——如今公園裡有超過100頭。她的原則很簡單：「大象不是表演動物，也不是交通工具。牠們是感受得到悲傷與喜悅的生命。」<div class="story-ja">創設者レック・チャイラートは幼い頃から象が虐待されるのを見ながら何もできなかった。1996年、全財産をはたいて傷ついた象を1頭購入。そして1頭、また1頭と——今では100頭以上が暮らす。「象はショーの動物でも乗り物でもない。悲しみも喜びも感じる命だ。」</div></div>
+          </div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Elephant+Nature+Park+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.8467" data-lng="99.0200" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'San Sai豬腳飯','place')">☆</button>
+        <div class="place-time">回程</div>
+        <div class="place-body">
+          <div class="place-name">San Sai 在地豬腳飯<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ข้าวขาหมูสันทราย</div>
+          <div class="place-desc">大象公園位於市區北邊，回程經過 San Sai 區，這一帶的滷豬腳飯是清邁人一致認證的頂級版本。米其林沒寫，Google Maps 評分 4.8 星。</div>
+          <div class="desc-ja">大象公園は市街北側。帰路にSan Saiエリアを通る。この地域の豚足ご飯はチェンマイ人が太鼓判を押す逸品。ミシュランには載っていないがGoogle Maps評価4.8星。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=San+Sai+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item food" data-lat="18.7820" data-lng="99.0010" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Lert Ros海鮮','place')">☆</button>
+        <div class="place-time">晚餐</div>
+        <div class="place-body">
+          <div class="place-name">Lert Ros Pochana 海鮮<span class="dist-badge"></span></div>
+          <div class="place-name-th">เลิศรสโภชนา</div>
+          <div class="place-desc">清邁在地海鮮名店，份量大、價格公道，炒飯與烤蝦必點。當地人慶生常選這裡。</div>
+          <div class="desc-ja">チェンマイの地元シーフードの名店。量多く価格も良心的。チャーハンと海老の塩焼きは必注文。地元の誕生日会でも選ばれる人気店。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Lert+Ros+Pochana+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+    </div>
+    <div class="day-divider"></div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-num">04</div>
+      <div>
+        <div class="day-label">烹飪課 · Ping河 · JJ Market</div>
+        <div class="day-sub">Cooking · Riverside · 大學夜市</div>
+      </div>
+    </div>
+    <div class="place-list">
+      <div class="place-item activity" data-lat="18.8133" data-lng="98.9383" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'泰式烹飪課','place')">☆</button>
+        <div class="place-time">09:00</div>
+        <div class="place-body">
+          <div class="place-name">泰式烹飪課<span class="dist-badge"></span></div>
+          <div class="place-name-th">สอนทำอาหารไทย</div>
+          <div class="place-desc">推薦 Thai Farm Cooking School，包含農場採菜體驗，半日課程 ≈ 1,000 THB。或選 Baan Thai Cookery（古城內，在老宅廚房上課，氣氛更好）。</div>
+          <div class="desc-ja">Thai Farm Cooking Schoolがおすすめ。農場での食材収穫体験付き半日コース、約1,000バーツ。または旧市街の古民家で行うBaan Thai Cookeryも雰囲気抜群。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Thai+Farm+Cooking+School+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item hidden" data-lat="18.6833" data-lng="98.9500" data-moods="local ethical">
+        <button class="fav-btn" onclick="openDayPicker(this,'Baan Tawai手工藝村','place')">☆</button>
+        <div class="place-time">14:00</div>
+        <div class="place-body">
+          <div class="place-name">Baan Tawai 手工藝村<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">บ้านถวาย</div>
+          <div class="place-desc">距市區 15km，整個村莊以木雕和手工家具聞名，當地工匠在你面前現場製作。價格是夜市的一半，紀念品品質是夜市的十倍。Grab 來回約 200 THB。</div>
+          <div class="desc-ja">市内から15km。村全体が木彫りと手工芸家具で有名。職人が目の前で制作する。お土産の値段は夜市の半額で品質は10倍。Grabで往復約200バーツ。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag ethical">💚 倫理性</span></div>
+          <div class="story-wrap">
+            <button class="story-toggle" onclick="toggleStory(this)"><span class="arrow">▶</span> 地方故事</button>
+            <div class="story-content">這個村子的木雕傳統超過600年，起源於蘭納王朝時期寺廟的建造工匠。今天在村裡走動，還能看到老師傅用傳統工具一刀一刀雕出神像和家具。和在夜市買紀念品最大的不同是：你知道它出自誰的手。<div class="story-ja">この村の木彫り伝統は600年以上。ランナー王朝時代の寺院建設職人に起源を持つ。今も老職人が伝統工具で一刀一刀、神像や家具を彫る姿を見られる。夜市でお土産を買うのと最大の違いは：誰の手から生まれたかがわかること。</div></div>
+          </div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Baan+Tawai+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item nature" data-lat="18.7900" data-lng="99.0040" data-moods="nature quiet local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Ping河畔','place')">☆</button>
+        <div class="place-time">17:00</div>
+        <div class="place-body">
+          <div class="place-name">Ping 河畔傍晚<span class="dist-badge"></span></div>
+          <div class="place-name-th">แม่น้ำปิง</div>
+          <div class="place-desc">The Good View 或 Riverside Bar 一帶，傍晚在露台喝飲料看河景，現場 Live Band 演出。比 Nimman 少觀光、更有生活感。</div>
+          <div class="desc-ja">The Good ViewかRiverside Bar一帯。夕方にテラスで飲み物を楽しみながら川の景色を眺め、ライブバンド演奏を聴く。Nimmanより観光色が少なく生活感がある。</div>
+          <div class="mood-tags"><span class="mood-tag nature">🌿 自然系</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Ping+River+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item market" data-lat="18.7944" data-lng="98.9531" data-moods="local quiet">
+        <button class="fav-btn" onclick="openDayPicker(this,'CMU週六夜市','place')">☆</button>
+        <div class="place-time">17:00</div>
+        <div class="place-body">
+          <div class="place-name">清邁大學週六夜市（JJ Market）<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ตลาดนัด มช. · CMU Walking Street</div>
+          <div class="place-desc">（每逢週六）清邁大學校門口夜市，學生自製二手書、手作飾品、在地食物，價格比觀光夜市低 40%，年輕在地人最愛的週末聚集地。</div>
+          <div class="desc-ja">（毎土曜日）チェンマイ大学の門前夜市。学生手作りの古本、ハンドメイドアクセサリー、地元の食べ物。値段は観光夜市より40%安く、地元若者の週末の集まり場所。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag quiet">🤫 靜思型</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=CMU+Walking+Street+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+    </div>
+    <div class="day-divider"></div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">
+      <div class="day-num">05</div>
+      <div>
+        <div class="day-label">最後一天</div>
+        <div class="day-sub">按摩 · Warorot · 離境</div>
+      </div>
+    </div>
+    <div class="place-list">
+      <div class="place-item hidden" data-lat="18.7944" data-lng="98.9600" data-moods="local quiet solo">
+        <button class="fav-btn" onclick="openDayPicker(this,'Ton Payom早市','place')">☆</button>
+        <div class="place-time">07:30</div>
+        <div class="place-body">
+          <div class="place-name">Talat Ton Payom 在地早市<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ตลาดต้นพยอม</div>
+          <div class="place-desc">清邁大學旁的傳統市場，每天早上只到中午。在地阿嬤賣的北泰甜點、自製豆漿、現包粿條。完全沒有英文菜單，用手指也能買。</div>
+          <div class="desc-ja">チェンマイ大学隣の伝統市場。毎朝昼まで営業。地元のおばあさんが作る北タイスイーツ、手作り豆乳、手包みクイティアオ。英語メニューは一切なし。指差しでも買える。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span><span class="mood-tag quiet">🤫 靜思型</span><span class="mood-tag solo">🧘 獨處向</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Talat+Ton+Payom+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item activity" data-lat="18.7867" data-lng="98.9850" data-moods="ethical quiet solo">
+        <button class="fav-btn" onclick="openDayPicker(this,'Lila泰式按摩','place')">☆</button>
+        <div class="place-time">10:00</div>
+        <div class="place-body">
+          <div class="place-name">傳統泰式按摩（Lila）<span class="dist-badge"></span></div>
+          <div class="place-name-th">นวดแผนไทย</div>
+          <div class="place-desc">古城區推薦 Lila Thai Massage（聘用受刑人就業計畫，品質好、價格公道）。避開 Tha Phae Gate 附近招牌太花俏的店。2小時 300 THB。</div>
+          <div class="desc-ja">刑務所受刑者の就労支援プログラム。品質良く、価格も良心的。Tha Phae Gate近くの派手な看板の店は避けて。2時間300バーツ。</div>
+          <div class="mood-tags"><span class="mood-tag ethical">💚 倫理性</span><span class="mood-tag quiet">🤫 靜思型</span><span class="mood-tag solo">🧘 獨處向</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Lila+Thai+Massage+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item market" data-lat="18.7928" data-lng="99.0017" data-moods="local">
+        <button class="fav-btn" onclick="openDayPicker(this,'Warorot市場','place')">☆</button>
+        <div class="place-time">13:00</div>
+        <div class="place-body">
+          <div class="place-name">Warorot 市場（卡多）<span class="local-badge">在地推薦</span><span class="dist-badge"></span></div>
+          <div class="place-name-th">ตลาดวโรรส</div>
+          <div class="place-desc">在地人採購市場，乾貨、咖啡粉、辣椒醬、手工皂比觀光區便宜三成。二樓有北泰傳統服飾批發，一樓地下室是清邁最多口味的辣醬賣場。</div>
+          <div class="desc-ja">地元民の日常市場。乾物、コーヒー粉、チリソース、手作り石鹸は観光地より3割安い。2階に北タイ伝統衣装の卸売り、地下にチェンマイで最多フレーバーのチリソース売り場。</div>
+          <div class="mood-tags"><span class="mood-tag local">🏮 在地人</span></div>
+        </div>
+        <a class="place-map" href="https://maps.google.com/?q=Warorot+Market+Chiang+Mai" target="_blank">地圖↗</a>
+      </div>
+      <div class="place-item food">
+        <div class="place-time">17:00</div>
+        <div class="place-body">
+          <div class="place-name">最後一碗咖哩麵</div>
+          <div class="place-name-th">ข้าวซอย</div>
+          <div class="place-desc">推薦 Khao Soi Islam（古城西門旁，清真版本湯底更清爽）或 Khao Soi Maesai（老城區開了30年的無名小店）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end default-plan-view -->
+</div>
+
+<!-- DAY PICKER OVERLAY -->
+<div class="day-picker-overlay" id="day-overlay" onclick="closeDayPicker()"></div>
+<div class="day-picker" id="day-picker">
+  <div class="day-picker-title">收藏並排入哪一天？</div>
+  <div class="day-picker-name" id="day-picker-name"></div>
+  <div class="day-picker-days" id="day-picker-days"></div>
+</div>
+
+<!-- 3. FOOD -->
+<div class="section" id="sec-food">
+  <div class="food-filter">
+    <button class="filter-btn active" onclick="filterFood('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterFood('north',this)">北泰料理</button>
+    <button class="filter-btn" onclick="filterFood('street',this)">街頭小吃</button>
+    <button class="filter-btn" onclick="filterFood('breakfast',this)">早餐</button>
+    <button class="filter-btn" onclick="filterFood('late',this)">深夜</button>
+    <button class="filter-btn" onclick="filterFood('dessert',this)">甜點</button>
+    <button class="filter-btn" onclick="filterFood('cafe',this)">咖啡</button>
+    <button class="filter-btn" onclick="filterFood('bar',this)">🍺 酒吧</button>
+  </div>
+  <div class="food-list" id="food-list">
+
+    <div class="food-card show" data-cat="north" data-lat="18.7900" data-lng="98.9900">
+      <div class="food-emoji">🍜</div>
+      <div class="food-body">
+        <div class="food-name">咖哩椰奶麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Soi</span><span class="dist-badge"></span></div>
+        <div class="food-name-th">ข้าวซอย（Khao Soi Islam, 古城西門）</div>
+        <div class="food-desc">清邁靈魂料理。椰奶咖哩湯底，軟麵與炸麵共碗，搭配醃菜和辣油。幾乎每間北泰館都有，但品質差很多。</div>
+        <div class="food-tags"><span class="tag must">必吃</span><span class="tag spicy">微辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 60–90 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🌭</div>
+      <div class="food-body">
+        <div class="food-name">北泰香腸 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Sai Ua</span></div>
+        <div class="food-name-th">ไส้อั่ว</div>
+        <div class="food-desc">以香茅、薑黃、南薑調味的豬肉香腸，烤得微焦，香氣層次豐富。市場和路邊攤最道地。</div>
+        <div class="food-tags"><span class="tag must">必吃</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 40–60 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🍲</div>
+      <div class="food-body">
+        <div class="food-name">番茄豬肉湯麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Naem Ngio</span></div>
+        <div class="food-name-th">แหนมเงี้ยว</div>
+        <div class="food-desc">以番茄為底的酸香湯麵，加入豬肋骨和發酵豬肉（Naem），只有清邁才有的稀有口味。</div>
+        <div class="food-tags"><span class="tag spicy">中辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 50–80 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🥬</div>
+      <div class="food-body">
+        <div class="food-name">北泰沾醬拼盤 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khantoke</span></div>
+        <div class="food-name-th">ขันโตก</div>
+        <div class="food-desc">低圓桌料理，多種小菜圍繞中心：炸豬皮、番茄辣醬（Nam Prik Ong）、各式沾醬搭糯米飯。</div>
+        <div class="food-tags"><span class="tag veg">可素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 200+ ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="street">
+      <div class="food-emoji">🥚</div>
+      <div class="food-body">
+        <div class="food-name">煎雞蛋腸粉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khanom Krok</span></div>
+        <div class="food-name-th">ขนมครก</div>
+        <div class="food-desc">椰奶烤糕，外脆內軟，芋頭或玉米口味。夜市最常見的甜味小吃之一。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 20–30 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="street">
+      <div class="food-emoji">🧆</div>
+      <div class="food-body">
+        <div class="food-name">炸豬皮 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Kaeb Moo</span></div>
+        <div class="food-name-th">แคบหมู</div>
+        <div class="food-desc">清邁特有零食，極度酥脆的豬皮，搭配 Nam Prik Noom（青辣椒醬）是絕配。</div>
+        <div class="food-tags"><span class="tag must">必試</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 20–40 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="dessert">
+      <div class="food-emoji">🥭</div>
+      <div class="food-body">
+        <div class="food-name">芒果糯米飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Niao Mamuang</span></div>
+        <div class="food-name-th">ข้าวเหนียวมะม่วง</div>
+        <div class="food-desc">泰國甜點之王。椰汁糯米配新鮮芒果，4–8月芒果季最甜美。市場隨處可見。</div>
+        <div class="food-tags"><span class="tag must">必吃</span><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 50–80 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="dessert">
+      <div class="food-emoji">🍨</div>
+      <div class="food-body">
+        <div class="food-name">椰子冰淇淋</div>
+        <div class="food-name-th">ไอศกรีมกะทิ</div>
+        <div class="food-desc">真正的椰子殼盛裝，澆上椰汁、花生、玉米。熱天必備，Nimman 路上多家在賣。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 40–60 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="cafe" data-lat="18.7960" data-lng="98.9673">
+      <div class="food-emoji">☕</div>
+      <div class="food-body">
+        <div class="food-name">Ristr8to Lab<span class="dist-badge"></span></div>
+        <div class="food-name-th">尼曼路精品咖啡先驅</div>
+        <div class="food-desc">清邁精品咖啡的代名詞，使用清邁高地阿拉比卡豆，冠軍咖啡師背景，拿鐵拉花精緻。</div>
+        <div class="food-tags"><span class="tag must">必訪</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 80–150 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="cafe" data-lat="18.7867" data-lng="98.9862">
+      <div class="food-emoji">🌿</div>
+      <div class="food-body">
+        <div class="food-name">Graph Café<span class="dist-badge"></span></div>
+        <div class="food-name-th">古城區老屋咖啡</div>
+        <div class="food-desc">改造自百年老屋，植物環繞，WiFi 快、插座多，長期旅人最愛的共工空間。</div>
+        <div class="food-tags"><span class="tag veg">蔬食友善</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 80–120 ฿</div>
+    </div>
+
+    <!-- MORE FOOD -->
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🥣</div>
+      <div class="food-body">
+        <div class="food-name">椰奶南薑雞湯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Tom Kha Gai</span></div>
+        <div class="food-name-th">ต้มข่าไก่</div>
+        <div class="food-desc">椰奶、南薑、香茅、泰國蘑菇燉雞，酸中帶甜的濃郁湯頭。比 Tom Yum 溫和，是不敢太辣卻想感受泰味的最佳入口。搭白飯吃是清邁家常版本。</div>
+        <div class="food-tags"><span class="tag veg">可素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 70–100 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🍛</div>
+      <div class="food-body">
+        <div class="food-name">馬薩曼咖哩 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Massaman Curry</span></div>
+        <div class="food-name-th">แกงมัสมั่น</div>
+        <div class="food-desc">受波斯與印度影響的泰南咖哩，以肉桂、荳蔻、丁香調味，口感濃厚不辣，甜中帶鹹。清邁的版本常用牛肉或雞肉，配烤花生，比 Khao Soi 更少見外國人點。</div>
+        <div class="food-tags"><span class="tag must">必試</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 80–120 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="street">
+      <div class="food-emoji">🍢</div>
+      <div class="food-body">
+        <div class="food-name">沙嗲串燒 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Satay</span></div>
+        <div class="food-name-th">สะเต๊ะ</div>
+        <div class="food-desc">薑黃醃漬的雞肉或豬肉竹籤炭烤，搭配花生醬和黃瓜醋漬。夜市和週日步行街到處可見推車，5串一份，配花生醬蘸著吃。起源自馬來西亞、清邁版本偏甜。</div>
+        <div class="food-tags"><span class="tag sweet">微甜</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="street">
+      <div class="food-emoji">🍳</div>
+      <div class="food-body">
+        <div class="food-name">海南雞飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Man Gai</span></div>
+        <div class="food-name-th">ข้าวมันไก่</div>
+        <div class="food-desc">泰式海南雞飯，雞油炊飯配水煮嫩雞，沾薑味醬油吃。清邁版本常搭酸辣湯，份量扎實，是上班族午餐的第一名選擇。路邊攤版和餐廳版差異不大，選排隊人多那攤準沒錯。</div>
+        <div class="food-tags"><span class="tag must">必吃</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 45–60 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🫕</div>
+      <div class="food-body">
+        <div class="food-name">泰北酸豬肉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Naem</span></div>
+        <div class="food-name-th">แหนม</div>
+        <div class="food-desc">自然發酵的生豬肉腸，酸鮮帶勁，清邁特產。直接切片搭炸豬皮吃，或作為湯底（Naem Ngio）。當地人習以為常，外地人初嘗通常反應兩極——但嘗過的人幾乎都愛上。</div>
+        <div class="food-tags"><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地限定</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 30–60 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="dessert">
+      <div class="food-emoji">🧋</div>
+      <div class="food-body">
+        <div class="food-name">泰式奶茶 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Cha Yen</span></div>
+        <div class="food-name-th">ชาเย็น</div>
+        <div class="food-desc">以錫蘭紅茶沖泡，加入煉乳和淡奶，鮮橙色澤是香料染成。清邁版比曼谷甜度更低，路邊攤現沖版遠勝便利商店瓶裝版。下午3點喝一杯是當地人的固定儀式。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 25–40 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="dessert">
+      <div class="food-emoji">🍦</div>
+      <div class="food-body">
+        <div class="food-name">黑芝麻豆腐花 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Tao Hoo Warm</span></div>
+        <div class="food-name-th">เต้าหู้อุ่น</div>
+        <div class="food-desc">泰式熱豆腐花，淋薑汁糖漿，加黑芝麻。Warorot 市場和古城早市攤販都有。冬天早上喝一碗暖胃，在地人吃早餐的頻率和豆漿差不多，觀光客幾乎不知道。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 20–30 ฿</div>
+    </div>
+
+    <!-- BARS -->
+    <div class="food-card show" data-cat="bar" data-lat="18.7912" data-lng="98.9923">
+      <div class="food-emoji">🎷</div>
+      <div class="food-body">
+        <div class="food-name">North Gate Jazz Co-op<span class="dist-badge"></span></div>
+        <div class="food-name-th">古城北門旁爵士酒吧</div>
+        <div class="food-desc">清邁最知名的現場爵士酒吧，每晚21:00開始演奏，本地樂手輪番上陣。露天半開放空間，在城牆邊喝啤酒聽爵士，是清邁夜晚最有靈魂的一個角落。入場免費，飲料 70 THB 起。</div>
+        <div class="food-tags"><span class="tag must">必去</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 70–150 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="bar" data-lat="18.7874" data-lng="98.9878">
+      <div class="food-emoji">🏮</div>
+      <div class="food-body">
+        <div class="food-name">Zoe in Yellow</div>
+        <div class="food-name-th">古城夜生活中心</div>
+        <div class="food-desc">清邁背包客夜生活的地標，一整個廣場的露天酒吧和音樂，週末人氣爆棚。適合想融入熱鬧氣氛的夜晚。桌旁的本地啤酒 Chang 一瓶 60 THB，便宜實惠。</div>
+        <div class="food-tags"><span class="tag spicy">熱鬧</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 60–120 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="bar" data-lat="18.7967" data-lng="98.9689">
+      <div class="food-emoji">🌇</div>
+      <div class="food-body">
+        <div class="food-name">Rooftop @ U Nimman<span class="dist-badge"></span></div>
+        <div class="food-name-th">尼曼路頂樓酒吧</div>
+        <div class="food-desc">尼曼路 U Hotel 頂樓，270度視野俯瞰尼曼街區與遠山。清邁城市夜景最佳觀賞點之一。雞尾酒 250 THB 起，適合和友人慶祝或安靜地看夜景。無需預訂，著裝稍微整齊即可。</div>
+        <div class="food-tags"><span class="tag sweet">景觀</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●●</span> 250–400 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="bar" data-lat="18.7895" data-lng="99.0025">
+      <div class="food-emoji">🎸</div>
+      <div class="food-body">
+        <div class="food-name">Good View Riverside Bar</div>
+        <div class="food-name-th">Ping河畔現場音樂</div>
+        <div class="food-desc">Ping 河邊最老牌的 Live Music 餐廳酒吧，每晚都有現場演奏（泰流行、搖滾、爵士輪替）。戶外座位在河風中聽音樂，附近幾間風格類似，可以邊走邊選喜歡的氛圍。</div>
+        <div class="food-tags"><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地氛圍</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 100–200 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="bar" data-lat="18.7862" data-lng="98.9867">
+      <div class="food-emoji">📖</div>
+      <div class="food-body">
+        <div class="food-name">Writer's Club & Wine Bar</div>
+        <div class="food-name-th">古城靜謐酒吧</div>
+        <div class="food-desc">INFJ/INFP 最愛的那種酒吧：安靜、有書、老歐洲風格。紅酒選擇豐富，適合獨自坐著寫日記或和朋友深聊。音樂不大聲，你可以清楚聽到彼此說話。清邁老派文藝圈的私人據點。</div>
+        <div class="food-tags"><span class="tag veg">安靜</span><span class="tag must">獨處首選</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 150–300 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="bar">
+      <div class="food-emoji">🌙</div>
+      <div class="food-body">
+        <div class="food-name">Warm Up Café</div>
+        <div class="food-name-th">尼曼路 Live Music 大型場地</div>
+        <div class="food-desc">清邁最大的 Live Music 夜場，幾個舞台同時進行不同類型音樂。週末人潮洶湧，是想感受當地年輕人夜生活文化的最佳選擇。清邁大學生的週末聚點，凌晨2點後最熱鬧。</div>
+        <div class="food-tags"><span class="tag spicy">熱鬧</span><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地人</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 100–200 ฿</div>
+    </div>
+
+    <!-- BREAKFAST -->
+    <div class="food-card show" data-cat="breakfast">
+      <div class="food-emoji">🍢</div>
+      <div class="food-body">
+        <div class="food-name">豬肉串燒配糯米飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Moo Ping + Khao Niao</span></div>
+        <div class="food-name-th">หมูปิ้ง + ข้าวเหนียว</div>
+        <div class="food-desc">清邁人最日常的早餐組合。炭火烤豬肉串（蜂蜜醃製），配一盒糯米飯，在路邊站著吃才道地。Pratu Chiang Mai 早市每串 10 THB，一個人 40 THB 吃到飽。</div>
+        <div class="food-tags"><span class="tag must">必吃</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="breakfast">
+      <div class="food-emoji">🥣</div>
+      <div class="food-body">
+        <div class="food-name">豬雜粥 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Joke Moo</span></div>
+        <div class="food-name-th">โจ๊กหมู</div>
+        <div class="food-desc">清邁版廣東粥，比曼谷版更濃稠，加豬肝、豬心、薑絲、蔥花。老城區幾間開到凌晨的粥店，深夜喝酒後的收尾最舒服。Joke Prince 是公認第一。</div>
+        <div class="food-tags"><span class="tag must">必試</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 50–70 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="breakfast">
+      <div class="food-emoji">🫓</div>
+      <div class="food-body">
+        <div class="food-name">泰式吐司配煉乳 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khanom Pang</span></div>
+        <div class="food-name-th">ขนมปังปิ้งชาไทย</div>
+        <div class="food-desc">炭烤厚片吐司，抹奶油和煉乳，搭配泰式奶茶（Cha Yen）是清邁人的週末早餐儀式。尼曼路 Soi 9 的無名早餐店，早上8點排隊最長。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
+    </div>
+
+    <!-- LATE NIGHT -->
+    <div class="food-card show" data-cat="late">
+      <div class="food-emoji">🍜</div>
+      <div class="food-body">
+        <div class="food-name">深夜船麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Kuay Tiew Reua</span></div>
+        <div class="food-name-th">ก๋วยเตี๋ยวเรือ</div>
+        <div class="food-desc">豬血濃湯底，小碗制（一碗約 150ml），正常食量要吃 5–8 碗。Anusarn Market 旁的無名船麵攤，凌晨1點後人最多——清邁夜貓族的深夜儀式。</div>
+        <div class="food-tags"><span class="tag spicy">可加辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 15–20 ฿/碗</div>
+    </div>
+
+    <div class="food-card show" data-cat="late">
+      <div class="food-emoji">🍳</div>
+      <div class="food-body">
+        <div class="food-name">打拋豬蓋飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Pad Kra Pao</span></div>
+        <div class="food-name-th">ผัดกระเพราหมูสับไข่ดาว</div>
+        <div class="food-desc">泰國人自己最常吃的一道菜，不是給觀光客的。九層塔爆炒豬絞肉加荷包蛋，清邁版本比曼谷更辣。路邊炒飯攤隨時可點，是當地上班族的午餐首選。</div>
+        <div class="food-tags"><span class="tag spicy">中辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 50–70 ฿</div>
+    </div>
+
+    <!-- MORE NORTH THAI -->
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🍛</div>
+      <div class="food-body">
+        <div class="food-name">緬甸薑黃豬肉咖哩 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Gaeng Hang Lay</span></div>
+        <div class="food-name-th">แกงฮังเล</div>
+        <div class="food-desc">北泰獨有的緬甸風格咖哩，以薑黃、薑、大蒜慢燉豬五花，完全不辣、微甜帶酸。只有清邁以北才有，曼谷幾乎找不到正宗版。配糯米飯最對味。</div>
+        <div class="food-tags"><span class="tag must">必吃</span><span class="tag veg" style="border-color:#3A2A0A;color:#C89A4A">無辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 60–80 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🥗</div>
+      <div class="food-body">
+        <div class="food-name">泰北拉帕 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Laab Muang</span></div>
+        <div class="food-name-th">ลาบเมือง</div>
+        <div class="food-desc">北泰版豬肉涼拌，與東北版（Isaan）完全不同——不酸、不用檸檬汁，改用豬血和深色香料調味，口感更厚重。清邁在地人早上也吃。Laab Ubol 是公認名店。</div>
+        <div class="food-tags"><span class="tag spicy">微辣</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 60–90 ฿</div>
+    </div>
+
+    <div class="food-card show" data-cat="north">
+      <div class="food-emoji">🍗</div>
+      <div class="food-body">
+        <div class="food-name">清邁烤雞 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Gai Yang Chiang Mai</span></div>
+        <div class="food-name-th">ไก่ย่างเชียงใหม่</div>
+        <div class="food-desc">清邁風格烤雞比曼谷版醃料更複雜（南薑、香茅、魚露），外皮酥脆、肉汁豐富。Cherng Doi Roast Chicken 是清邁人公認的標竿，店小排隊長。</div>
+        <div class="food-tags"><span class="tag must">必試</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 70–120 ฿</div>
+    </div>
+
+    <!-- MORE STREET -->
+    <div class="food-card show" data-cat="street">
+      <div class="food-emoji">🌯</div>
+      <div class="food-body">
+        <div class="food-name">印度煎餅配香蕉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Roti Kluay</span></div>
+        <div class="food-name-th">โรตีกล้วย</div>
+        <div class="food-desc">現做薄脆煎餅包香蕉，淋上煉乳和巧克力醬。起源於穆斯林社區，清邁夜市和步行街隨處可見推車。一份 40 THB，邊走邊吃的最佳夜市小吃。</div>
+        <div class="food-tags"><span class="tag sweet">甜</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
+    </div>
+
+    <!-- MORE CAFE -->
+    <div class="food-card show" data-cat="cafe">
+      <div class="food-emoji">🏠</div>
+      <div class="food-body">
+        <div class="food-name">Ponganes Espresso<span class="local-badge" style="background:#1A1A30;color:#8888E8;border-color:#2A2A50">在地人</span></div>
+        <div class="food-name-th">尼曼 Soi 9 巷內</div>
+        <div class="food-desc">清邁咖啡師圈子的私房推薦，不在 Soi 1 大路上，要走進 Soi 9 才找到。單品豆來自清邁周邊山區，每季換豆，在地咖啡師下班後常來這裡。沒有在 Google 打廣告。</div>
+        <div class="food-tags"><span class="tag must">必訪</span></div>
+      </div>
+      <div class="food-price"><span class="price-dot">●●</span> 80–130 ฿</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 4. BUDGET -->
+<div class="section" id="sec-budget">
+
+  <div class="budget-summary">
+    <div class="budget-total-label">總花費（THB）</div>
+    <div class="budget-total-val"><span>฿ </span><span id="total-thb">0</span></div>
+    <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">≈ NT$ <span id="total-twd">0</span></div>
+    <div class="budget-bars">
+      <div class="budget-bar-row">
+        <div class="budget-bar-label">食物</div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-food" style="width:0%;background:var(--orange)"></div></div>
+        <div class="budget-bar-amt" id="lbl-food">0 ฿</div>
+      </div>
+      <div class="budget-bar-row">
+        <div class="budget-bar-label">交通</div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-trans" style="width:0%;background:var(--teal)"></div></div>
+        <div class="budget-bar-amt" id="lbl-trans">0 ฿</div>
+      </div>
+      <div class="budget-bar-row">
+        <div class="budget-bar-label">景點</div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-sight" style="width:0%;background:var(--gold)"></div></div>
+        <div class="budget-bar-amt" id="lbl-sight">0 ฿</div>
+      </div>
+      <div class="budget-bar-row">
+        <div class="budget-bar-label">購物</div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-shop" style="width:0%;background:#9B6FC8"></div></div>
+        <div class="budget-bar-amt" id="lbl-shop">0 ฿</div>
+      </div>
+      <div class="budget-bar-row">
+        <div class="budget-bar-label">其他</div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-other" style="width:0%;background:var(--green-light)"></div></div>
+        <div class="budget-bar-amt" id="lbl-other">0 ฿</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="converter-box">
+    <div class="converter-title">泰銖 ↔ 台幣 換算</div>
+    <div class="converter-row">
+      <div class="converter-input-wrap">
+        <div class="converter-label">泰銖 THB</div>
+        <input type="number" class="converter-input" id="conv-thb" placeholder="0" oninput="convFromTHB(this.value)">
+      </div>
+      <div class="converter-arrow">⇌</div>
+      <div class="converter-input-wrap">
+        <div class="converter-label">台幣 TWD</div>
+        <input type="number" class="converter-input" id="conv-twd" placeholder="0" oninput="convFromTWD(this.value)">
+      </div>
+    </div>
+    <div class="rate-note">匯率參考：1 TWD ≈ 1.10 THB &nbsp;|&nbsp; 1 JPY ≈ 0.23 THB｜出發前請確認實際匯率</div>
+    <div style="display:flex;gap:10px;margin-top:10px;align-items:center">
+      <div class="converter-input-wrap">
+        <div class="converter-label">日圓 JPY</div>
+        <input type="number" class="converter-input" id="conv-jpy" placeholder="0" oninput="convFromJPY(this.value)">
+      </div>
+      <div class="converter-arrow">⇌</div>
+      <div class="converter-input-wrap">
+        <div class="converter-label">泰銖 THB</div>
+        <input type="number" class="converter-input" id="conv-jpy-thb" placeholder="0" oninput="convFromTHBtoJPY(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <div class="expense-form">
+    <div class="expense-form-title">新增花費</div>
+    <div class="form-row">
+      <input type="text" class="form-input" id="exp-desc" placeholder="花費說明（例：午餐咖哩麵）">
+    </div>
+    <div class="form-row">
+      <input type="number" class="form-input" id="exp-amt" placeholder="金額 THB">
+      <select class="form-select" id="exp-cat">
+        <option value="food">食物</option>
+        <option value="trans">交通</option>
+        <option value="sight">景點</option>
+        <option value="shop">購物</option>
+        <option value="other">其他</option>
+      </select>
+    </div>
+    <button class="btn-add" onclick="addExpense()">新增</button>
+  </div>
+
+  <div class="section-title" style="padding-top:12px">花費記錄</div>
+  <div class="expense-list" id="expense-list">
+    <div style="text-align:center;padding:20px;color:var(--text-dim);font-size:0.82rem">尚無花費記錄</div>
+  </div>
+</div>
+
+<!-- 5. CHEATSHEET -->
+<div class="section" id="sec-tips">
+
+  <div class="section-title" style="padding-top:16px">實用泰語</div>
+  <div style="padding:0 20px 8px;display:flex;align-items:center;justify-content:space-between">
+    <span style="font-size:0.72rem;color:var(--text-dim)">點擊複製泰文</span>
+    <button class="lang-toggle" id="phrase-lang-btn" onclick="togglePhraseLang()" style="font-size:0.68rem">🇯🇵 顯示日文</button>
+  </div>
+
+  <div class="phrase-cat">
+    <div class="phrase-cat-title">基本禮儀</div>
+    <div class="phrase-grid">
+      <div class="phrase-item" onclick="copyPhrase('สวัสดีครับ')"><div class="phrase-zh">你好<span class="phrase-ja" style="display:none;color:#7A8A7A;font-size:0.72rem;display:block">こんにちは</span></div><div class="phrase-th">สวัสดีครับ</div><div class="phrase-rom">サワッディー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ขอบคุณครับ')"><div class="phrase-zh">謝謝<span class="phrase-ja" style="display:none">ありがとう</span></div><div class="phrase-th">ขอบคุณครับ</div><div class="phrase-rom">コープクン</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไม่เป็นไร')"><div class="phrase-zh">沒關係<span class="phrase-ja" style="display:none">大丈夫</span></div><div class="phrase-th">ไม่เป็นไร</div><div class="phrase-rom">マイペンライ</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ขอโทษครับ')"><div class="phrase-zh">對不起<span class="phrase-ja" style="display:none">すみません</span></div><div class="phrase-th">ขอโทษครับ</div><div class="phrase-rom">コートート</div></div>
+    </div>
+  </div>
+
+  <div class="phrase-cat">
+    <div class="phrase-cat-title">飲食</div>
+    <div class="phrase-grid">
+      <div class="phrase-item" onclick="copyPhrase('ไม่เผ็ด')"><div class="phrase-zh">不要辣<span class="phrase-ja" style="display:none">辛くしないで</span></div><div class="phrase-th">ไม่เผ็ด</div><div class="phrase-rom">マイペット</div></div>
+      <div class="phrase-item" onclick="copyPhrase('อร่อยมาก')"><div class="phrase-zh">很好吃<span class="phrase-ja" style="display:none">美味しい</span></div><div class="phrase-th">อร่อยมาก</div><div class="phrase-rom">アロイマーク</div></div>
+      <div class="phrase-item" onclick="copyPhrase('เก็บเงินด้วย')"><div class="phrase-zh">買單<span class="phrase-ja" style="display:none">お会計</span></div><div class="phrase-th">เก็บเงินด้วย</div><div class="phrase-rom">ゲップグン</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไม่ใส่ผักชี')"><div class="phrase-zh">不要香菜<span class="phrase-ja" style="display:none">パクチーなし</span></div><div class="phrase-th">ไม่ใส่ผักชี</div><div class="phrase-rom">マイサイパクチー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('น้ำเปล่าหนึ่งขวด')"><div class="phrase-zh">一瓶水<span class="phrase-ja" style="display:none">水1本</span></div><div class="phrase-th">น้ำเปล่าหนึ่งขวด</div><div class="phrase-rom">ナムプラオ</div></div>
+      <div class="phrase-item" onclick="copyPhrase('มังสวิรัติ')"><div class="phrase-zh">素食<span class="phrase-ja" style="display:none">ベジタリアン</span></div><div class="phrase-th">มังสวิรัติ</div><div class="phrase-rom">マンサウィラット</div></div>
+    </div>
+  </div>
+
+  <div class="phrase-cat">
+    <div class="phrase-cat-title">購物議價</div>
+    <div class="phrase-grid">
+      <div class="phrase-item" onclick="copyPhrase('ราคาเท่าไหร่')"><div class="phrase-zh">多少錢<span class="phrase-ja" style="display:none">いくらですか</span></div><div class="phrase-th">ราคาเท่าไหร่</div><div class="phrase-rom">ラーカータオライ</div></div>
+      <div class="phrase-item" onclick="copyPhrase('แพงไปหน่อย')"><div class="phrase-zh">太貴了<span class="phrase-ja" style="display:none">高すぎます</span></div><div class="phrase-th">แพงไปหน่อย</div><div class="phrase-rom">ペングパイノイ</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ลดได้ไหม')"><div class="phrase-zh">可以便宜嗎<span class="phrase-ja" style="display:none">安くなりますか</span></div><div class="phrase-th">ลดได้ไหม</div><div class="phrase-rom">ロットダイマイ</div></div>
+      <div class="phrase-item" onclick="copyPhrase('เอาอันนี้')"><div class="phrase-zh">我要這個<span class="phrase-ja" style="display:none">これをください</span></div><div class="phrase-th">เอาอันนี้</div><div class="phrase-rom">アオアンニー</div></div>
+    </div>
+  </div>
+
+  <div class="phrase-cat">
+    <div class="phrase-cat-title">交通</div>
+    <div class="phrase-grid">
+      <div class="phrase-item" onclick="copyPhrase('ไปที่นี่')"><div class="phrase-zh">去這裡<span class="phrase-ja" style="display:none">ここへ行って</span></div><div class="phrase-th">ไปที่นี่</div><div class="phrase-rom">パイティーニー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('จอดตรงนี้เลย')"><div class="phrase-zh">停這裡<span class="phrase-ja" style="display:none">ここで止めて</span></div><div class="phrase-th">จอดตรงนี้เลย</div><div class="phrase-rom">ジョートロングニー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไปสนามบิน')"><div class="phrase-zh">去機場<span class="phrase-ja" style="display:none">空港へ</span></div><div class="phrase-th">ไปสนามบิน</div><div class="phrase-rom">パイサナームビン</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">實用資訊</div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-title">緊急聯絡</div>
+      <div class="info-row"><div class="info-key">旅遊警察</div><div class="info-val"><a href="tel:1155">1155</a></div></div>
+      <div class="info-row"><div class="info-key">救護車</div><div class="info-val"><a href="tel:1669">1669</a></div></div>
+      <div class="info-row"><div class="info-key">一般警察</div><div class="info-val"><a href="tel:191">191</a></div></div>
+      <div class="info-row"><div class="info-key">Ram Hospital</div><div class="info-val"><a href="tel:+6653920300">+66 53 920 300</a></div></div>
+      <div class="info-row"><div class="info-key">台灣辦事處</div><div class="info-val"><a href="tel:+6622507130">+66 2 250 7130</a></div></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">交通費用參考</div>
+      <div class="info-row"><div class="info-key">Grab 市區</div><div class="info-val">60–120 THB</div></div>
+      <div class="info-row"><div class="info-key">紅色雙排車</div><div class="info-val">30–50 THB/人</div></div>
+      <div class="info-row"><div class="info-key">摩托計程車</div><div class="info-val">40–80 THB</div></div>
+      <div class="info-row"><div class="info-key">機場到古城</div><div class="info-val">120–180 THB</div></div>
+      <div class="info-row"><div class="info-key">租摩托車/日</div><div class="info-val">150–300 THB</div></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">清邁機場 (CNX)</div>
+      <div class="info-row"><div class="info-key">ICAO 代碼</div><div class="info-val">VTCC</div></div>
+      <div class="info-row"><div class="info-key">市區距離</div><div class="info-val">約 3 km</div></div>
+      <div class="info-row"><div class="info-key">SIM 卡</div><div class="info-val">入境大廳有售</div></div>
+      <div class="info-row"><div class="info-key">換錢</div><div class="info-val">機場匯率差，建議少換</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">行李清單</div>
+  <div class="pack-list" id="pack-list">
+  </div>
+  <div style="padding:12px 20px 4px;font-size:0.72rem;color:var(--text-dim)">點擊勾選已打包</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="switchTab('home',this)" aria-label="概覽">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    概覽
+  </button>
+  <button class="nav-item" onclick="switchTab('plan',this)" aria-label="行程">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    行程
+  </button>
+  <button class="nav-item" onclick="switchTab('food',this)" aria-label="美食">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    美食
+  </button>
+  <button class="nav-item" onclick="switchTab('budget',this)" aria-label="預算">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    預算
+  </button>
+  <button class="nav-item" onclick="switchTab('tips',this)" aria-label="小抄">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+    小抄
+  </button>
+</nav>
+
+<div class="phrase-copied" id="copy-toast">已複製泰文</div>
+
+<script>
+  // TAB NAVIGATION
+  function switchTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo(0, 0);
+    if (id === 'home') updateOverviewStats();
+  }
+
+  // WEATHER
+  function setWeather() {
+    var month = new Date().getMonth() + 1;
+    var wx = document.getElementById.bind(document);
+    if (month >= 11 || month <= 2) {
+      wx('wx-season').textContent = '涼季 11月–2月';
+      wx('wx-desc').textContent = '白天25°C，夜晚涼爽15°C。最佳旅遊時節，旺季需提早訂房。';
+      wx('wx-temp').textContent = '22°';
+      wx('wx-icon').textContent = '🌤';
+    } else if (month >= 3 && month <= 6) {
+      wx('wx-season').textContent = '熱季 3月–6月';
+      wx('wx-desc').textContent = '白天高達38°C，3–4月煙霧季（山火），建議避開戶外景點。';
+      wx('wx-temp').textContent = '36°';
+      wx('wx-icon').textContent = '🔥';
+    } else {
+      wx('wx-season').textContent = '雨季 7月–10月';
+      wx('wx-desc').textContent = '下午陣雨為主，叢林翠綠，遊客少，費用較低。帶傘出門。';
+      wx('wx-temp').textContent = '28°';
+      wx('wx-icon').textContent = '🌧';
+    }
+  }
+  setWeather();
+
+  // TRIP DAYS
+  document.getElementById('trip-days-left').textContent = '出發前請設定日期';
+
+  // GEOLOCATION
+  function haversine(lat1, lng1, lat2, lng2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLng = (lng2 - lng1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function fmtDist(km) {
+    if (km < 1) return Math.round(km * 1000) + 'm';
+    return km.toFixed(1) + 'km';
+  }
+
+  function locateMe() {
+    if (!navigator.geolocation) {
+      document.getElementById('loc-label').textContent = '不支援定位';
+      return;
+    }
+    var btn = document.getElementById('loc-btn');
+    btn.classList.add('loading');
+    document.getElementById('loc-label').textContent = '定位中…';
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      var userLat = pos.coords.latitude;
+      var userLng = pos.coords.longitude;
+      var items = document.querySelectorAll('[data-lat][data-lng]');
+      items.forEach(function(el) {
+        var lat = parseFloat(el.dataset.lat);
+        var lng = parseFloat(el.dataset.lng);
+        var km = haversine(userLat, userLng, lat, lng);
+        var badge = el.querySelector('.dist-badge');
+        if (badge) {
+          badge.textContent = fmtDist(km);
+          badge.classList.add('visible');
+          badge.classList.toggle('near', km < 1);
+        }
+      });
+      btn.classList.remove('loading');
+      btn.classList.add('active');
+      document.getElementById('loc-label').textContent = '已定位';
+    }, function(err) {
+      btn.classList.remove('loading');
+      document.getElementById('loc-label').textContent = err.code === 1 ? '請允許定位' : '定位失敗';
+      setTimeout(function() {
+        document.getElementById('loc-label').textContent = '顯示距離';
+      }, 3000);
+    }, { timeout: 10000, maximumAge: 60000 });
+  }
+
+  // FOOD FILTER
+  function filterFood(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.food-card[data-cat]').forEach(c => {
+      if (cat === 'all' || c.dataset.cat === cat) c.classList.add('show');
+      else c.classList.remove('show');
+    });
+  }
+
+  // CURRENCY CONVERTER
+  const RATE = 1.10; // 1 TWD = 1.10 THB
+  function convFromTHB(v) {
+    document.getElementById('conv-twd').value = v ? (parseFloat(v) / RATE).toFixed(0) : '';
+  }
+  function convFromTWD(v) {
+    document.getElementById('conv-thb').value = v ? (parseFloat(v) * RATE).toFixed(0) : '';
+  }
+
+  // Safe localStorage wrapper — iOS file:// blocks localStorage, fallback to in-memory
+  var _mem = {};
+  var store = {
+    get: function(k, def) { try { var v = localStorage.getItem(k); return v !== null ? v : def; } catch(e) { return k in _mem ? _mem[k] : def; } },
+    set: function(k, v) { try { localStorage.setItem(k, v); } catch(e) { _mem[k] = v; } }
+  };
+
+  // BUDGET / EXPENSES
+  const catColors = { food:'var(--orange)', trans:'var(--teal)', sight:'var(--gold)', shop:'#9B6FC8', other:'var(--green-light)' };
+  const catNames = { food:'食物', trans:'交通', sight:'景點', shop:'購物', other:'其他' };
+  let expenses = JSON.parse(store.get('cm_expenses', '[]'));
+
+  function saveExpenses() { store.set('cm_expenses', JSON.stringify(expenses)); }
+
+  function addExpense() {
+    const desc = document.getElementById('exp-desc').value.trim();
+    const amt = parseFloat(document.getElementById('exp-amt').value);
+    const cat = document.getElementById('exp-cat').value;
+    if (!desc || !amt || amt <= 0) return;
+    expenses.push({ id: Date.now(), desc, amt, cat });
+    saveExpenses();
+    document.getElementById('exp-desc').value = '';
+    document.getElementById('exp-amt').value = '';
+    renderExpenses();
+  }
+
+  function deleteExpense(id) {
+    expenses = expenses.filter(e => e.id !== id);
+    saveExpenses();
+    renderExpenses();
+  }
+
+  function renderExpenses() {
+    const list = document.getElementById('expense-list');
+    if (expenses.length === 0) {
+      list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim);font-size:0.82rem">尚無花費記錄</div>';
+      updateSummary();
+      return;
+    }
+    list.innerHTML = expenses.slice().reverse().map(e => `
+      <div class="expense-item">
+        <div class="expense-cat-dot" style="background:${catColors[e.cat]}"></div>
+        <div class="expense-desc">${e.desc} <span style="font-size:0.72rem;color:var(--text-dim)">${catNames[e.cat]}</span></div>
+        <div class="expense-amt">฿${e.amt.toLocaleString()}</div>
+        <button class="expense-del" onclick="deleteExpense(${e.id})">✕</button>
+      </div>
+    `).join('');
+    updateSummary();
+  }
+
+  function updateSummary() {
+    const totals = { food:0, trans:0, sight:0, shop:0, other:0 };
+    let grand = 0;
+    expenses.forEach(e => { totals[e.cat] += e.amt; grand += e.amt; });
+    document.getElementById('total-thb').textContent = grand.toLocaleString();
+    document.getElementById('total-twd').textContent = Math.round(grand / RATE).toLocaleString();
+    const max = Math.max(...Object.values(totals), 1);
+    Object.keys(totals).forEach(k => {
+      document.getElementById('bar-' + k).style.width = (totals[k] / max * 100) + '%';
+      document.getElementById('lbl-' + k).textContent = totals[k] > 0 ? '฿' + totals[k].toLocaleString() : '0 ฿';
+    });
+  }
+
+  renderExpenses();
+
+  // PHRASE COPY
+  function copyPhrase(text) {
+    navigator.clipboard.writeText(text).catch(() => {});
+    const toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1500);
+  }
+
+  // PACKING LIST
+  const packItems = [
+    { name: '護照', note: '有效期 6 個月以上' },
+    { name: '台灣健保卡 & 旅遊保險', note: '建議拍照備份' },
+    { name: '輕薄防曬衣', note: '寺廟遮肩膝用' },
+    { name: '防曬乳 SPF 50+', note: '戶外活動必備' },
+    { name: '驅蚊液', note: '叢林活動尤其重要' },
+    { name: '腸胃藥 & 止瀉藥', note: '換換口味時備用' },
+    { name: '備用眼鏡 / 隱形眼鏡', note: '' },
+    { name: '輕便雨衣或摺疊傘', note: '雨季必備' },
+    { name: '行動電源', note: 'Grab 候車時常用到' },
+    { name: 'Grab App', note: '出發前下載並綁定信用卡' },
+    { name: '現金泰銖', note: '市場小攤多不收卡' },
+    { name: '涼鞋（易穿脫）', note: '進出寺廟頻繁' },
+    { name: '防水袋或手機殼', note: '大象公園、泛舟用' },
+    { name: '小背包或腰包', note: '夜市防扒輕旅行' },
+  ];
+
+  function renderPackList() {
+    const checked = JSON.parse(store.get('cm_pack', '[]'));
+    const list = document.getElementById('pack-list');
+    list.innerHTML = packItems.map((item, i) => `
+      <div class="pack-item ${checked.includes(i) ? 'checked' : ''}" onclick="togglePack(${i})">
+        <div class="pack-check"></div>
+        <div class="pack-name">${item.name}</div>
+        ${item.note ? `<div class="pack-note">${item.note}</div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function togglePack(i) {
+    let checked = JSON.parse(store.get('cm_pack', '[]'));
+    if (checked.includes(i)) checked = checked.filter(x => x !== i);
+    else checked.push(i);
+    store.set('cm_pack', JSON.stringify(checked));
+    renderPackList();
+  }
+
+  renderPackList();
+
+  // JPY CONVERTER
+  var JPY_RATE = 0.23;
+  function convFromJPY(v) { document.getElementById('conv-jpy-thb').value = v ? (parseFloat(v)*JPY_RATE).toFixed(0) : ''; }
+  function convFromTHBtoJPY(v) { document.getElementById('conv-jpy').value = v ? (parseFloat(v)/JPY_RATE).toFixed(0) : ''; }
+
+  // JAPANESE TOGGLE
+  function toggleJa() {
+    var btn = document.getElementById('lang-toggle');
+    document.body.classList.toggle('show-ja');
+    btn.classList.toggle('active');
+    btn.textContent = document.body.classList.contains('show-ja') ? '🇯🇵 ON' : '🇯🇵 JP';
+  }
+
+  // JAPANESE PHRASES
+  var phraseJaOn = false;
+  function togglePhraseLang() {
+    phraseJaOn = !phraseJaOn;
+    document.querySelectorAll('.phrase-ja').forEach(function(s){ s.style.display = phraseJaOn ? 'block' : 'none'; });
+    document.getElementById('phrase-lang-btn').textContent = phraseJaOn ? '🇯🇵 隱藏日文' : '🇯🇵 顯示日文';
+  }
+
+  // STORY TOGGLE
+  function toggleStory(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('show');
+  }
+
+  // MOOD FILTER
+  function filterMood(mood, btn) {
+    document.querySelectorAll('.mood-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.place-item[data-moods]').forEach(function(el) {
+      el.style.display = (mood === 'all' || el.dataset.moods.indexOf(mood) !== -1) ? '' : 'none';
+    });
+  }
+
+  // PLAN SUB-TABS
+  function switchPlanTab(tab, btn) {
+    document.querySelectorAll('.plan-subtab').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var isMyList = tab === 'mylist';
+    document.getElementById('default-plan-view').style.display = isMyList ? 'none' : 'block';
+    document.getElementById('my-list-view').style.display = isMyList ? 'block' : 'none';
+    if (isMyList) renderMyList();
+  }
+
+  // FAVORITES
+  var favorites = JSON.parse(store.get('cm_favs', '[]'));
+  var pendingFavBtn = null, pendingFavName = '', pendingFavType = '';
+
+  function saveFavs() { store.set('cm_favs', JSON.stringify(favorites)); }
+
+  function openDayPicker(btn, name, type) {
+    var idx = favorites.findIndex(function(f){ return f.name === name; });
+    if (idx !== -1) {
+      favorites.splice(idx, 1); saveFavs();
+      btn.textContent = '☆'; btn.classList.remove('active');
+      updateOverviewStats(); return;
+    }
+    pendingFavBtn = btn; pendingFavName = name; pendingFavType = type;
+    document.getElementById('day-picker-name').textContent = name;
+    document.querySelectorAll('.day-picker-btn').forEach(function(b){ b.classList.remove('sel'); });
+    document.getElementById('day-picker').classList.add('show');
+    document.getElementById('day-overlay').classList.add('show');
+  }
+
+  function closeDayPicker() {
+    document.getElementById('day-picker').classList.remove('show');
+    document.getElementById('day-overlay').classList.remove('show');
+    pendingFavBtn = null;
+  }
+
+  function assignDay(day) {
+    if (pendingFavBtn) {
+      favorites = favorites.filter(function(f){ return f.name !== pendingFavName; });
+      favorites.push({ name: pendingFavName, type: pendingFavType, day: day });
+      saveFavs();
+      if (pendingFavBtn.textContent !== undefined) {
+        pendingFavBtn.textContent = '⭐'; pendingFavBtn.classList.add('active');
+      }
+    }
+    closeDayPicker();
+    var t = document.getElementById('copy-toast');
+    t.textContent = day === 0 ? '已加入未排定' : '已加入 Day ' + day;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1500);
+    renderMyList();
+    updateOverviewStats();
+  }
+
+  var tripDays = parseInt(store.get('cm_days', '5'));
+
+  function renderDayPickerBtns() {
+    var el = document.getElementById('day-picker-days');
+    if (!el) return;
+    var html = '';
+    for (var i = 1; i <= tripDays; i++) {
+      html += '<button class="day-picker-btn" onclick="assignDay(' + i + ')">Day ' + i + '</button>';
+    }
+    html += '<button class="day-picker-btn" onclick="assignDay(0)">未排定</button>';
+    el.innerHTML = html;
+  }
+
+  function updateOverviewStats() {
+    var d = document.getElementById('stat-days');
+    var f = document.getElementById('stat-favs');
+    var df = document.getElementById('stat-days-filled');
+    var bar = document.getElementById('stat-progress');
+    var barFill = document.getElementById('stat-progress-bar');
+    if (d) d.textContent = tripDays;
+    if (f) f.textContent = favorites.length;
+    var filledDays = new Set();
+    favorites.forEach(function(fav){ if (fav.day > 0) filledDays.add(fav.day); });
+    if (df) df.textContent = filledDays.size;
+    if (bar) bar.style.display = tripDays > 0 ? 'block' : 'none';
+    if (barFill) barFill.style.width = Math.round(filledDays.size / tripDays * 100) + '%';
+  }
+
+  function setTripDays(delta) {
+    var current = parseInt(document.getElementById('trip-days-display').textContent) || 5;
+    var n = Math.max(1, Math.min(14, current + delta));
+    tripDays = n;
+    store.set('cm_days', n);
+    document.getElementById('trip-days-display').textContent = n;
+    renderDayPickerBtns();
+    renderMyList();
+    updateOverviewStats();
+  }
+
+  function renderMyList() {
+    var el = document.getElementById('my-list-content');
+    if (!el) return;
+    if (favorites.length === 0) {
+      el.innerHTML = '<div class="my-list-empty">清單是空的<br><br>在行程或美食頁點 ☆ 收藏<br>並選擇想排入哪一天</div>';
+      return;
+    }
+    var byDay = {};
+    byDay[0] = [];
+    for (var i = 1; i <= tripDays; i++) byDay[i] = [];
+    favorites.forEach(function(f){ if (byDay[f.day] !== undefined) byDay[f.day].push(f); else byDay[0].push(f); });
+    var html = '';
+    var order = [];
+    for (var i = 1; i <= tripDays; i++) order.push(i);
+    order.push(0);
+    order.forEach(function(d) {
+      if (!byDay[d].length) return;
+      var label = d === 0 ? '📌 未排定' : '第 ' + d + ' 天';
+      html += '<div class="my-list-day-group"><div class="my-list-day-title">' + label
+        + '<span style="font-size:0.7rem;color:var(--text-dim)">' + byDay[d].length + ' 個</span></div>';
+      byDay[d].forEach(function(f) {
+        var safeName = f.name.replace(/'/g, "\\'");
+        html += '<div class="my-list-item">'
+          + '<div class="my-list-dot" style="background:var(--gold)"></div>'
+          + '<div class="my-list-name">' + f.name + '</div>'
+          + '<button class="my-list-day-btn" onclick="rechoseDay(\'' + safeName + '\')">' + (d===0?'排日期':'Day '+d) + '</button>'
+          + '<button class="my-list-del" onclick="removeFav(\'' + safeName + '\')">✕</button>'
+          + '</div>';
+      });
+      html += '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function removeFav(name) {
+    favorites = favorites.filter(function(f){ return f.name !== name; });
+    saveFavs();
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      if ((btn.getAttribute('onclick')||'').indexOf("'" + name + "'") !== -1) {
+        btn.textContent = '☆'; btn.classList.remove('active');
+      }
+    });
+    renderMyList();
+    updateOverviewStats();
+  }
+
+  function rechoseDay(name) {
+    var fav = favorites.find(function(f){ return f.name === name; });
+    if (!fav) return;
+    pendingFavName = name; pendingFavType = fav.type;
+    pendingFavBtn = { textContent:'', classList:{ add:function(){}, remove:function(){} } };
+    document.getElementById('day-picker-name').textContent = name;
+    document.querySelectorAll('.day-picker-btn').forEach(function(b){
+      b.classList.toggle('sel', b.textContent === (fav.day===0 ? '未排定' : 'Day '+fav.day));
+    });
+    document.getElementById('day-picker').classList.add('show');
+    document.getElementById('day-overlay').classList.add('show');
+  }
+
+  // Init trip days display
+  document.getElementById('trip-days-display').textContent = tripDays;
+  renderDayPickerBtns();
+  updateOverviewStats();
+
+  // Init food cards — add ☆ button and map link dynamically
+  document.querySelectorAll('.food-card').forEach(function(card) {
+    var nameEl = card.querySelector('.food-name');
+    if (!nameEl) return;
+    // Extract plain text name (ignore child spans)
+    var name = '';
+    nameEl.childNodes.forEach(function(n){ if (n.nodeType === 3) name += n.textContent.trim(); });
+    if (!name) name = nameEl.textContent.split('\n')[0].trim();
+
+    // action row inside food-body
+    var actions = document.createElement('div');
+    actions.className = 'food-actions';
+
+    var ml = document.createElement('a');
+    ml.className = 'place-map';
+    var lat = card.getAttribute('data-lat');
+    var lng = card.getAttribute('data-lng');
+    ml.href = (lat && lng)
+      ? 'https://maps.google.com/?q=' + lat + ',' + lng
+      : 'https://maps.google.com/?q=Chiang+Mai+' + encodeURIComponent(name);
+    ml.target = '_blank';
+    ml.rel = 'noopener';
+    ml.textContent = '地圖↗';
+    actions.appendChild(ml);
+
+    var fb = document.createElement('button');
+    fb.className = 'fav-btn';
+    fb.textContent = '☆';
+    fb.setAttribute('onclick', "openDayPicker(this,'" + name.replace(/'/g,"\\'") + "','food')");
+    actions.appendChild(fb);
+
+    var body = card.querySelector('.food-body');
+    if (body) body.appendChild(actions); else card.appendChild(actions);
+  });
+
+  // Restore star states on place items
+  favorites.forEach(function(f) {
+    document.querySelectorAll('.fav-btn').forEach(function(btn) {
+      if ((btn.getAttribute('onclick')||'').indexOf("'" + f.name + "'") !== -1) {
+        btn.textContent = '⭐'; btn.classList.add('active');
+      }
+    });
+  });
+
+  // Update empty-state hint to mention food too
+  var emptyHint = document.querySelector('.my-list-empty');
+  if (emptyHint) emptyHint.innerHTML = '清單是空的<br><br>在行程或美食頁點 ☆ 收藏<br>並選擇想排入哪一天';
+</script>
+</body>
+</html>
