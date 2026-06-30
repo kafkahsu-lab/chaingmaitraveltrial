@@ -1869,6 +1869,13 @@
 <div class="phrase-copied" id="copy-toast">已複製泰文<span class="desc-ja" style="font-size:0.7rem;font-style:normal;display:none;margin-left:4px">（タイ語コピー済）</span></div>
 
 <script>
+  // Safe localStorage wrapper — iOS file:// blocks localStorage, fallback to in-memory
+  var _mem = {};
+  var store = {
+    get: function(k, def) { try { var v = localStorage.getItem(k); return v !== null ? v : def; } catch(e) { return k in _mem ? _mem[k] : def; } },
+    set: function(k, v) { try { localStorage.setItem(k, v); } catch(e) { _mem[k] = v; } }
+  };
+
   // TAB NAVIGATION
   function switchTab(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -2013,13 +2020,6 @@
   function convFromTWD(v) {
     document.getElementById('conv-thb').value = v ? (parseFloat(v) * RATE).toFixed(0) : '';
   }
-
-  // Safe localStorage wrapper — iOS file:// blocks localStorage, fallback to in-memory
-  var _mem = {};
-  var store = {
-    get: function(k, def) { try { var v = localStorage.getItem(k); return v !== null ? v : def; } catch(e) { return k in _mem ? _mem[k] : def; } },
-    set: function(k, v) { try { localStorage.setItem(k, v); } catch(e) { _mem[k] = v; } }
-  };
 
   // BUDGET / EXPENSES
   const catColors = { food:'var(--orange)', trans:'var(--teal)', sight:'var(--gold)', shop:'#9B6FC8', other:'var(--green-light)' };
