@@ -747,6 +747,7 @@
     <div class="weather-info">
       <div class="season" id="wx-season">涼季</div>
       <div class="desc" id="wx-desc">11月–2月最宜人，白天25°C，夜晚涼爽。是旅遊旺季，建議提早訂房。</div>
+      <div class="desc-ja" id="wx-desc-ja">11月〜2月が最も過ごしやすい。昼間25°C、夜は涼しい。観光シーズンのため早めの宿泊予約を。</div>
     </div>
     <div class="weather-temp" id="wx-temp">25°</div>
   </div>
@@ -758,6 +759,7 @@
       <div class="tip-body">
         <strong>換錢建議</strong>
         <span>機場匯率差，建議在市區 SuperRich 或 Kasikorn Bank 換。1 TWD ≈ 1.1 THB（參考）。</span>
+        <div class="desc-ja">空港の両替レートは悪い。市内のSuperRichかKasikorn Bankでの両替を推奨。1 TWD ≈ 1.1 THB（参考値）。</div>
       </div>
     </div>
     <div class="tip-item">
@@ -765,6 +767,7 @@
       <div class="tip-body">
         <strong>交通</strong>
         <span>市區搭 Grab 最方便，紅色雙排車（Song Thaew）固定路線便宜，摩托計程車需議價。</span>
+        <div class="desc-ja">市内はGrabが最も便利。赤いソンテウ（乗合トラック）は固定ルートで安い。バイクタクシーは要交渉。</div>
       </div>
     </div>
     <div class="tip-item">
@@ -772,6 +775,7 @@
       <div class="tip-body">
         <strong>寺廟禮儀</strong>
         <span>進寺廟需脫鞋、衣著覆蓋肩膀與膝蓋。白象寺（Wat Rong Khun）需付門票。</span>
+        <div class="desc-ja">寺院では脱靴・肩と膝を隠す服装が必須。白い寺（ワット・ロンクン）は入場料あり。</div>
       </div>
     </div>
     <div class="tip-item">
@@ -779,6 +783,7 @@
       <div class="tip-body">
         <strong>飲食安全</strong>
         <span>自來水不可生飲，街頭冰塊通常安全。辣度「mai phet」（不辣）記得說。</span>
+        <div class="desc-ja">水道水は飲用不可。屋台の氷は通常安全。辛さを抑えたいときは「マイペット（辛くしないで）」と伝えよう。</div>
       </div>
     </div>
     <div class="tip-item">
@@ -786,6 +791,7 @@
       <div class="tip-body">
         <strong>網路 SIM 卡</strong>
         <span>機場入境大廳買 True Move H 或 AIS，30天無限流量 ≈ 299 THB。</span>
+        <div class="desc-ja">到着ロビーでTrue Move HかAISのSIMを購入。30日間データ無制限プラン ≈ 299バーツ。</div>
       </div>
     </div>
     <div class="tip-item">
@@ -793,6 +799,7 @@
       <div class="tip-body">
         <strong>緊急聯絡</strong>
         <span>旅遊警察：1155｜救護車：1669｜Ram Hospital（近 Nimman）：+66 53 920 300</span>
+        <div class="desc-ja">観光警察：1155｜救急：1669｜ラム病院（ニマン近く）：+66 53 920 300</div>
       </div>
     </div>
   </div>
@@ -1841,16 +1848,19 @@
       wx('wx-desc').textContent = '白天25°C，夜晚涼爽15°C。最佳旅遊時節，旺季需提早訂房。';
       wx('wx-temp').textContent = '22°';
       wx('wx-icon').textContent = '🌤';
+      if (wx('wx-desc-ja')) wx('wx-desc-ja').textContent = '昼25°C、夜15°Cで涼しい。旅行に最適なシーズン。繁忙期のため宿の早期予約を推奨。';
     } else if (month >= 3 && month <= 6) {
       wx('wx-season').textContent = '熱季 3月–6月';
       wx('wx-desc').textContent = '白天高達38°C，3–4月煙霧季（山火），建議避開戶外景點。';
       wx('wx-temp').textContent = '36°';
       wx('wx-icon').textContent = '🔥';
+      if (wx('wx-desc-ja')) wx('wx-desc-ja').textContent = '昼は38°Cまで上昇。3〜4月は山火事によるスモッグシーズン。屋外観光は避けるのが無難。';
     } else {
       wx('wx-season').textContent = '雨季 7月–10月';
       wx('wx-desc').textContent = '下午陣雨為主，叢林翠綠，遊客少，費用較低。帶傘出門。';
       wx('wx-temp').textContent = '28°';
       wx('wx-icon').textContent = '🌧';
+      if (wx('wx-desc-ja')) wx('wx-desc-ja').textContent = '午後にスコールが多い。ジャングルが緑豊か、観光客が少なく費用も安め。傘は必携。';
     }
   }
   setWeather();
@@ -2003,20 +2013,20 @@
 
   // PACKING LIST
   const packItems = [
-    { name: '護照', note: '有效期 6 個月以上' },
-    { name: '台灣健保卡 & 旅遊保險', note: '建議拍照備份' },
-    { name: '輕薄防曬衣', note: '寺廟遮肩膝用' },
-    { name: '防曬乳 SPF 50+', note: '戶外活動必備' },
-    { name: '驅蚊液', note: '叢林活動尤其重要' },
-    { name: '腸胃藥 & 止瀉藥', note: '換換口味時備用' },
-    { name: '備用眼鏡 / 隱形眼鏡', note: '' },
-    { name: '輕便雨衣或摺疊傘', note: '雨季必備' },
-    { name: '行動電源', note: 'Grab 候車時常用到' },
-    { name: 'Grab App', note: '出發前下載並綁定信用卡' },
-    { name: '現金泰銖', note: '市場小攤多不收卡' },
-    { name: '涼鞋（易穿脫）', note: '進出寺廟頻繁' },
-    { name: '防水袋或手機殼', note: '大象公園、泛舟用' },
-    { name: '小背包或腰包', note: '夜市防扒輕旅行' },
+    { name: '護照', nameJa: 'パスポート', note: '有效期 6 個月以上', noteJa: '有効期限6ヶ月以上' },
+    { name: '台灣健保卡 & 旅遊保險', nameJa: '健康保険証＆旅行保険', note: '建議拍照備份', noteJa: '写真に撮ってバックアップを' },
+    { name: '輕薄防曬衣', nameJa: '薄手のUVカット衣類', note: '寺廟遮肩膝用', noteJa: '寺院での肌隠しに' },
+    { name: '防曬乳 SPF 50+', nameJa: '日焼け止め SPF 50+', note: '戶外活動必備', noteJa: '屋外活動に必須' },
+    { name: '驅蚊液', nameJa: '虫除けスプレー', note: '叢林活動尤其重要', noteJa: 'ジャングル活動時は特に重要' },
+    { name: '腸胃藥 & 止瀉藥', nameJa: '整腸剤＆下痢止め', note: '換換口味時備用', noteJa: '食あたり対策に' },
+    { name: '備用眼鏡 / 隱形眼鏡', nameJa: '予備メガネ／コンタクト', note: '', noteJa: '' },
+    { name: '輕便雨衣或摺疊傘', nameJa: '軽量レインコートor折りたたみ傘', note: '雨季必備', noteJa: '雨季の必需品' },
+    { name: '行動電源', nameJa: 'モバイルバッテリー', note: 'Grab 候車時常用到', noteJa: 'Grab待ち時間に大活躍' },
+    { name: 'Grab App', nameJa: 'Grabアプリ', note: '出發前下載並綁定信用卡', noteJa: '出発前にDL＆クレカ登録を' },
+    { name: '現金泰銖', nameJa: '現金（タイバーツ）', note: '市場小攤多不收卡', noteJa: '屋台・市場はカード不可が多い' },
+    { name: '涼鞋（易穿脫）', nameJa: 'サンダル（脱ぎ履きしやすいもの）', note: '進出寺廟頻繁', noteJa: '寺院の脱履が多い' },
+    { name: '防水袋或手機殼', nameJa: '防水袋orスマホケース', note: '大象公園、泛舟用', noteJa: '象との水浴び・川下り用' },
+    { name: '小背包或腰包', nameJa: '小さいリュックorウエストポーチ', note: '夜市防扒輕旅行', noteJa: '夜市でのスリ対策に' },
   ];
 
   function renderPackList() {
@@ -2025,8 +2035,10 @@
     list.innerHTML = packItems.map((item, i) => `
       <div class="pack-item ${checked.includes(i) ? 'checked' : ''}" onclick="togglePack(${i})">
         <div class="pack-check"></div>
-        <div class="pack-name">${item.name}</div>
-        ${item.note ? `<div class="pack-note">${item.note}</div>` : ''}
+        <div style="flex:1">
+          <div class="pack-name">${item.name}${item.nameJa ? `<span class="desc-ja" style="display:none;font-size:0.7rem;color:#7A8A7A;font-style:italic;margin-left:4px">${item.nameJa}</span>` : ''}</div>
+          ${item.note ? `<div class="pack-note">${item.note}${item.noteJa ? `<span class="desc-ja" style="display:none;font-size:0.68rem;color:#7A8A7A;margin-left:4px">／${item.noteJa}</span>` : ''}</div>` : ''}
+        </div>
       </div>
     `).join('');
   }
@@ -2053,11 +2065,12 @@
     var jaOn = document.body.classList.contains('show-ja');
     btn.classList.toggle('active');
     btn.textContent = jaOn ? '🇯🇵 ON' : '🇯🇵 JP';
-    // sync phrase section toggle
     phraseJaOn = jaOn;
     document.querySelectorAll('.phrase-ja').forEach(function(s){ s.style.display = jaOn ? 'block' : 'none'; });
     var pb = document.getElementById('phrase-lang-btn');
     if (pb) pb.textContent = jaOn ? '🇯🇵 隱藏日文' : '🇯🇵 顯示日文';
+    // re-render pack list so inline desc-ja spans pick up the new state
+    renderPackList();
   }
 
   // JAPANESE PHRASES
