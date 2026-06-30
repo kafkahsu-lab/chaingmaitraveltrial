@@ -611,7 +611,9 @@
   .phrase-item:active { border-color: var(--gold); }
   .phrase-zh { font-size: 0.85rem; color: var(--text); font-weight: 500; }
   .phrase-th { font-size: 0.85rem; color: var(--gold); }
-  .phrase-rom { font-size: 0.75rem; color: var(--text-muted); padding-top: 2px; }
+  .phrase-rom { font-size: 0.72rem; color: var(--text-muted); padding-top: 2px; display: flex; flex-direction: column; gap: 2px; }
+  .rom-en { color: var(--teal); font-size: 0.68rem; letter-spacing: 0.01em; }
+  .rom-ja { color: #7A8A7A; font-size: 0.68rem; }
   .phrase-copied {
     position: fixed;
     bottom: 90px;
@@ -1721,41 +1723,41 @@
   <div class="phrase-cat">
     <div class="phrase-cat-title">基本禮儀</div>
     <div class="phrase-grid">
-      <div class="phrase-item" onclick="copyPhrase('สวัสดีครับ')"><div class="phrase-zh">你好<span class="phrase-ja" style="display:none">こんにちは</span></div><div class="phrase-th">สวัสดีครับ</div><div class="phrase-rom">サワッディー</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ขอบคุณครับ')"><div class="phrase-zh">謝謝<span class="phrase-ja" style="display:none">ありがとう</span></div><div class="phrase-th">ขอบคุณครับ</div><div class="phrase-rom">コープクン</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ไม่เป็นไร')"><div class="phrase-zh">沒關係<span class="phrase-ja" style="display:none">大丈夫</span></div><div class="phrase-th">ไม่เป็นไร</div><div class="phrase-rom">マイペンライ</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ขอโทษครับ')"><div class="phrase-zh">對不起<span class="phrase-ja" style="display:none">すみません</span></div><div class="phrase-th">ขอโทษครับ</div><div class="phrase-rom">コートート</div></div>
+      <div class="phrase-item" onclick="copyPhrase('สวัสดีครับ')"><div class="phrase-zh">你好<span class="phrase-ja" style="display:none">こんにちは</span></div><div class="phrase-th">สวัสดีครับ</div><div class="phrase-rom"><span class="rom-en">Sa-wàt-dee kráp</span><span class="rom-ja">サワッディークラップ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ขอบคุณครับ')"><div class="phrase-zh">謝謝<span class="phrase-ja" style="display:none">ありがとう</span></div><div class="phrase-th">ขอบคุณครับ</div><div class="phrase-rom"><span class="rom-en">Kòp-khun kráp</span><span class="rom-ja">コープクンクラップ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไม่เป็นไร')"><div class="phrase-zh">沒關係<span class="phrase-ja" style="display:none">大丈夫</span></div><div class="phrase-th">ไม่เป็นไร</div><div class="phrase-rom"><span class="rom-en">Mâi pen rai</span><span class="rom-ja">マイペンライ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ขอโทษครับ')"><div class="phrase-zh">對不起<span class="phrase-ja" style="display:none">すみません</span></div><div class="phrase-th">ขอโทษครับ</div><div class="phrase-rom"><span class="rom-en">Khǒr thôht kráp</span><span class="rom-ja">コートートクラップ</span></div></div>
     </div>
   </div>
 
   <div class="phrase-cat">
     <div class="phrase-cat-title">飲食</div>
     <div class="phrase-grid">
-      <div class="phrase-item" onclick="copyPhrase('ไม่เผ็ด')"><div class="phrase-zh">不要辣<span class="phrase-ja" style="display:none">辛くしないで</span></div><div class="phrase-th">ไม่เผ็ด</div><div class="phrase-rom">マイペット</div></div>
-      <div class="phrase-item" onclick="copyPhrase('อร่อยมาก')"><div class="phrase-zh">很好吃<span class="phrase-ja" style="display:none">美味しい</span></div><div class="phrase-th">อร่อยมาก</div><div class="phrase-rom">アロイマーク</div></div>
-      <div class="phrase-item" onclick="copyPhrase('เก็บเงินด้วย')"><div class="phrase-zh">買單<span class="phrase-ja" style="display:none">お会計</span></div><div class="phrase-th">เก็บเงินด้วย</div><div class="phrase-rom">ゲップグン</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ไม่ใส่ผักชี')"><div class="phrase-zh">不要香菜<span class="phrase-ja" style="display:none">パクチーなし</span></div><div class="phrase-th">ไม่ใส่ผักชี</div><div class="phrase-rom">マイサイパクチー</div></div>
-      <div class="phrase-item" onclick="copyPhrase('น้ำเปล่าหนึ่งขวด')"><div class="phrase-zh">一瓶水<span class="phrase-ja" style="display:none">水1本</span></div><div class="phrase-th">น้ำเปล่าหนึ่งขวด</div><div class="phrase-rom">ナムプラオ</div></div>
-      <div class="phrase-item" onclick="copyPhrase('มังสวิรัติ')"><div class="phrase-zh">素食<span class="phrase-ja" style="display:none">ベジタリアン</span></div><div class="phrase-th">มังสวิรัติ</div><div class="phrase-rom">マンサウィラット</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไม่เผ็ด')"><div class="phrase-zh">不要辣<span class="phrase-ja" style="display:none">辛くしないで</span></div><div class="phrase-th">ไม่เผ็ด</div><div class="phrase-rom"><span class="rom-en">Mâi phèt</span><span class="rom-ja">マイペット</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('อร่อยมาก')"><div class="phrase-zh">很好吃<span class="phrase-ja" style="display:none">美味しい</span></div><div class="phrase-th">อร่อยมาก</div><div class="phrase-rom"><span class="rom-en">A-ròi mâak</span><span class="rom-ja">アロイマーク</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('เก็บเงินด้วย')"><div class="phrase-zh">買單<span class="phrase-ja" style="display:none">お会計</span></div><div class="phrase-th">เก็บเงินด้วย</div><div class="phrase-rom"><span class="rom-en">Kèp ngern dûay</span><span class="rom-ja">ゲップグンドゥアイ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไม่ใส่ผักชี')"><div class="phrase-zh">不要香菜<span class="phrase-ja" style="display:none">パクチーなし</span></div><div class="phrase-th">ไม่ใส่ผักชี</div><div class="phrase-rom"><span class="rom-en">Mâi sài phàk chee</span><span class="rom-ja">マイサイパクチー</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('น้ำเปล่าหนึ่งขวด')"><div class="phrase-zh">一瓶水<span class="phrase-ja" style="display:none">水1本</span></div><div class="phrase-th">น้ำเปล่าหนึ่งขวด</div><div class="phrase-rom"><span class="rom-en">Nám plào nùeng khùat</span><span class="rom-ja">ナムプラオヌングクワット</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('มังสวิรัติ')"><div class="phrase-zh">素食<span class="phrase-ja" style="display:none">ベジタリアン</span></div><div class="phrase-th">มังสวิรัติ</div><div class="phrase-rom"><span class="rom-en">Mang-sà-wi-rát</span><span class="rom-ja">マンサウィラット</span></div></div>
     </div>
   </div>
 
   <div class="phrase-cat">
     <div class="phrase-cat-title">購物議價</div>
     <div class="phrase-grid">
-      <div class="phrase-item" onclick="copyPhrase('ราคาเท่าไหร่')"><div class="phrase-zh">多少錢<span class="phrase-ja" style="display:none">いくらですか</span></div><div class="phrase-th">ราคาเท่าไหร่</div><div class="phrase-rom">ラーカータオライ</div></div>
-      <div class="phrase-item" onclick="copyPhrase('แพงไปหน่อย')"><div class="phrase-zh">太貴了<span class="phrase-ja" style="display:none">高すぎます</span></div><div class="phrase-th">แพงไปหน่อย</div><div class="phrase-rom">ペングパイノイ</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ลดได้ไหม')"><div class="phrase-zh">可以便宜嗎<span class="phrase-ja" style="display:none">安くなりますか</span></div><div class="phrase-th">ลดได้ไหม</div><div class="phrase-rom">ロットダイマイ</div></div>
-      <div class="phrase-item" onclick="copyPhrase('เอาอันนี้')"><div class="phrase-zh">我要這個<span class="phrase-ja" style="display:none">これをください</span></div><div class="phrase-th">เอาอันนี้</div><div class="phrase-rom">アオアンニー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ราคาเท่าไหร่')"><div class="phrase-zh">多少錢<span class="phrase-ja" style="display:none">いくらですか</span></div><div class="phrase-th">ราคาเท่าไหร่</div><div class="phrase-rom"><span class="rom-en">Raa-khaa thâo-rài</span><span class="rom-ja">ラーカータオライ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('แพงไปหน่อย')"><div class="phrase-zh">太貴了<span class="phrase-ja" style="display:none">高すぎます</span></div><div class="phrase-th">แพงไปหน่อย</div><div class="phrase-rom"><span class="rom-en">Phaeng pai nòi</span><span class="rom-ja">ペングパイノイ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ลดได้ไหม')"><div class="phrase-zh">可以便宜嗎<span class="phrase-ja" style="display:none">安くなりますか</span></div><div class="phrase-th">ลดได้ไหม</div><div class="phrase-rom"><span class="rom-en">Lót dâi mǎi</span><span class="rom-ja">ロットダイマイ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('เอาอันนี้')"><div class="phrase-zh">我要這個<span class="phrase-ja" style="display:none">これをください</span></div><div class="phrase-th">เอาอันนี้</div><div class="phrase-rom"><span class="rom-en">Ao an née</span><span class="rom-ja">アオアンニー</span></div></div>
     </div>
   </div>
 
   <div class="phrase-cat">
     <div class="phrase-cat-title">交通</div>
     <div class="phrase-grid">
-      <div class="phrase-item" onclick="copyPhrase('ไปที่นี่')"><div class="phrase-zh">去這裡<span class="phrase-ja" style="display:none">ここへ行って</span></div><div class="phrase-th">ไปที่นี่</div><div class="phrase-rom">パイティーニー</div></div>
-      <div class="phrase-item" onclick="copyPhrase('จอดตรงนี้เลย')"><div class="phrase-zh">停這裡<span class="phrase-ja" style="display:none">ここで止めて</span></div><div class="phrase-th">จอดตรงนี้เลย</div><div class="phrase-rom">ジョートロングニー</div></div>
-      <div class="phrase-item" onclick="copyPhrase('ไปสนามบิน')"><div class="phrase-zh">去機場<span class="phrase-ja" style="display:none">空港へ</span></div><div class="phrase-th">ไปสนามบิน</div><div class="phrase-rom">パイサナームビン</div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไปที่นี่')"><div class="phrase-zh">去這裡<span class="phrase-ja" style="display:none">ここへ行って</span></div><div class="phrase-th">ไปที่นี่</div><div class="phrase-rom"><span class="rom-en">Pai thîi nîi</span><span class="rom-ja">パイティーニー</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('จอดตรงนี้เลย')"><div class="phrase-zh">停這裡<span class="phrase-ja" style="display:none">ここで止めて</span></div><div class="phrase-th">จอดตรงนี้เลย</div><div class="phrase-rom"><span class="rom-en">Jòt trong nîi loei</span><span class="rom-ja">ジョートロングニーラーイ</span></div></div>
+      <div class="phrase-item" onclick="copyPhrase('ไปสนามบิน')"><div class="phrase-zh">去機場<span class="phrase-ja" style="display:none">空港へ</span></div><div class="phrase-th">ไปสนามบิน</div><div class="phrase-rom"><span class="rom-en">Pai sa-nǎam bin</span><span class="rom-ja">パイサナームビン</span></div></div>
     </div>
   </div>
 
