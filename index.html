@@ -2024,7 +2024,7 @@
   // BUDGET / EXPENSES
   const catColors = { food:'var(--orange)', trans:'var(--teal)', sight:'var(--gold)', shop:'#9B6FC8', other:'var(--green-light)' };
   const catNames = { food:'食物', trans:'交通', sight:'景點', shop:'購物', other:'其他' };
-  let expenses = JSON.parse(store.get('cm_expenses', '[]'));
+  let expenses = (function(){ try { return JSON.parse(store.get('cm_expenses','[]')); } catch(e){ store.set('cm_expenses','[]'); return []; } })();
 
   function saveExpenses() { store.set('cm_expenses', JSON.stringify(expenses)); }
 
@@ -2199,7 +2199,7 @@
   }
 
   // FAVORITES
-  var favorites = JSON.parse(store.get('cm_favs', '[]'));
+  var favorites = (function(){ try { return JSON.parse(store.get('cm_favs','[]')); } catch(e){ store.set('cm_favs','[]'); return []; } })();
   var pendingFavBtn = null, pendingFavName = '', pendingFavType = '';
 
   function saveFavs() { store.set('cm_favs', JSON.stringify(favorites)); }
