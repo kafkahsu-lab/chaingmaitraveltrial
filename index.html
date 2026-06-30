@@ -330,11 +330,11 @@
   .fav-btn.active { color:#E4B84A; }
   /* place items: pull ☆ to the end of the flex row, after 地圖↗ */
   .place-item { position:relative; }
-  .place-item .fav-btn { order:10; align-self:flex-start; padding:4px 6px; min-width:30px; min-height:30px; }
+  .place-item .fav-btn { order:10; align-self:flex-start; padding:4px 6px; min-width:44px; min-height:44px; }
   .place-item .place-map { order:9; align-self:flex-start; padding:6px 4px; }
   /* card actions row inside food-body */
   .food-actions { display:flex; align-items:center; gap:6px; margin-top:8px; }
-  .food-actions .fav-btn { padding:4px 6px; min-width:30px; min-height:30px; font-size:0.9rem; }
+  .food-actions .fav-btn { padding:4px 6px; min-width:44px; min-height:44px; font-size:0.9rem; }
   .food-actions .place-map { font-size:0.72rem; padding:4px 8px; border:1px solid var(--border-light); border-radius:8px; }
 
   /* DAY PICKER */
@@ -372,7 +372,8 @@
 
   /* JP DESC */
   .desc-ja { display:none; font-size:0.74rem; color:#7A8A7A; margin-top:4px; line-height:1.45; font-style:italic; }
-  body.show-ja .desc-ja { display:block; }
+  body.show-ja .desc-ja { display:block !important; }
+  body.show-ja .story-content .story-ja { display:block !important; }
   .lang-toggle { font-size:0.7rem; padding:4px 10px; border-radius:12px; border:1px solid var(--border-light); background:transparent; color:var(--text-dim); cursor:pointer; transition:all 0.15s; }
   .lang-toggle.active { border-color:#7A8A7A; color:#7A8A7A; background:#0A100A; }
 
@@ -1178,11 +1179,14 @@
       </div>
       <div class="place-item food">
         <div class="place-time">17:00</div>
+        <button class="fav-btn" onclick="openDayPicker(this,'最後一碗咖哩麵','place')">☆</button>
         <div class="place-body">
           <div class="place-name">最後一碗咖哩麵</div>
           <div class="place-name-th">ข้าวซอย</div>
           <div class="place-desc">推薦 Khao Soi Islam（古城西門旁，清真版本湯底更清爽）或 Khao Soi Maesai（老城區開了30年的無名小店）。</div>
+          <div class="desc-ja">最後の一杯はカオソーイで。Khao Soi Islam（旧市街西門そば、イスラム系でスープがさっぱり）またはKhao Soi Maesai（旧市街、創業30年の知る人ぞ知る名店）がおすすめ。</div>
         </div>
+        <a class="place-map" href="https://maps.google.com/?q=Khao+Soi+Islam+Chiang+Mai" target="_blank" rel="noopener">地圖↗</a>
       </div>
     </div>
   </div>
@@ -1218,6 +1222,7 @@
         <div class="food-name">咖哩椰奶麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Soi</span><span class="dist-badge"></span></div>
         <div class="food-name-th">ข้าวซอย（Khao Soi Islam, 古城西門）</div>
         <div class="food-desc">清邁靈魂料理。椰奶咖哩湯底，軟麵與炸麵共碗，搭配醃菜和辣油。幾乎每間北泰館都有，但品質差很多。</div>
+        <div class="desc-ja">チェンマイの魂料理。ココナッツカレースープに柔らかい麺と揚げ麺を合わせ、漬物と辛味油を添えて。北部タイ料理店ならどこにでもあるが質の差が大きい。</div>
         <div class="food-tags"><span class="tag must">必吃</span><span class="tag spicy">微辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 60–90 ฿</div>
@@ -1229,6 +1234,7 @@
         <div class="food-name">北泰香腸 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Sai Ua</span></div>
         <div class="food-name-th">ไส้อั่ว</div>
         <div class="food-desc">以香茅、薑黃、南薑調味的豬肉香腸，烤得微焦，香氣層次豐富。市場和路邊攤最道地。</div>
+        <div class="desc-ja">レモングラス・ターメリック・ガランガルで味付けした豚肉ソーセージ。程よく焦げ目がつくまで焼いた香り豊かな一品。市場や屋台が最も本場の味。</div>
         <div class="food-tags"><span class="tag must">必吃</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 40–60 ฿</div>
@@ -1240,6 +1246,7 @@
         <div class="food-name">番茄豬肉湯麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Naem Ngio</span></div>
         <div class="food-name-th">แหนมเงี้ยว</div>
         <div class="food-desc">以番茄為底的酸香湯麵，加入豬肋骨和發酵豬肉（Naem），只有清邁才有的稀有口味。</div>
+        <div class="desc-ja">トマトベースの酸味あるスープ麺。豚のあばら骨と発酵豚肉（ナム）入り。チェンマイでしか食べられない希少な味。</div>
         <div class="food-tags"><span class="tag spicy">中辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 50–80 ฿</div>
@@ -1251,6 +1258,7 @@
         <div class="food-name">北泰沾醬拼盤 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khantoke</span></div>
         <div class="food-name-th">ขันโตก</div>
         <div class="food-desc">低圓桌料理，多種小菜圍繞中心：炸豬皮、番茄辣醬（Nam Prik Ong）、各式沾醬搭糯米飯。</div>
+        <div class="desc-ja">低い丸テーブルを囲む北部タイ料理。揚げ豚皮・トマト辛味ソース（ナムプリックオン）など数種の小皿ともち米。</div>
         <div class="food-tags"><span class="tag veg">可素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 200+ ฿</div>
@@ -1262,6 +1270,7 @@
         <div class="food-name">煎雞蛋腸粉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khanom Krok</span></div>
         <div class="food-name-th">ขนมครก</div>
         <div class="food-desc">椰奶烤糕，外脆內軟，芋頭或玉米口味。夜市最常見的甜味小吃之一。</div>
+        <div class="desc-ja">ヤシミルクで焼いたお菓子。外はパリッと中はふわふわ。タロイモやとうもろこし味。夜市でよく見かける定番スイーツ。</div>
         <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 20–30 ฿</div>
@@ -1273,6 +1282,7 @@
         <div class="food-name">炸豬皮 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Kaeb Moo</span></div>
         <div class="food-name-th">แคบหมู</div>
         <div class="food-desc">清邁特有零食，極度酥脆的豬皮，搭配 Nam Prik Noom（青辣椒醬）是絕配。</div>
+        <div class="desc-ja">チェンマイ独特のスナック。パリパリに揚げた豚皮で、青唐辛子ソース（ナムプリックヌム）との相性が抜群。</div>
         <div class="food-tags"><span class="tag must">必試</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 20–40 ฿</div>
@@ -1284,6 +1294,7 @@
         <div class="food-name">芒果糯米飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Niao Mamuang</span></div>
         <div class="food-name-th">ข้าวเหนียวมะม่วง</div>
         <div class="food-desc">泰國甜點之王。椰汁糯米配新鮮芒果，4–8月芒果季最甜美。市場隨處可見。</div>
+        <div class="desc-ja">タイスイーツの王様。ヤシミルクのもち米に新鮮なマンゴーを添えて。4〜8月のマンゴーシーズンが最高。市場で手軽に買える。</div>
         <div class="food-tags"><span class="tag must">必吃</span><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 50–80 ฿</div>
@@ -1295,6 +1306,7 @@
         <div class="food-name">椰子冰淇淋</div>
         <div class="food-name-th">ไอศกรีมกะทิ</div>
         <div class="food-desc">真正的椰子殼盛裝，澆上椰汁、花生、玉米。熱天必備，Nimman 路上多家在賣。</div>
+        <div class="desc-ja">本物のヤシの実に盛り付け、ヤシミルク・ピーナッツ・とうもろこしをトッピング。暑い日の必需品。ニマン通りで多く販売。</div>
         <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 40–60 ฿</div>
@@ -1306,6 +1318,7 @@
         <div class="food-name">Ristr8to Lab<span class="dist-badge"></span></div>
         <div class="food-name-th">尼曼路精品咖啡先驅</div>
         <div class="food-desc">清邁精品咖啡的代名詞，使用清邁高地阿拉比卡豆，冠軍咖啡師背景，拿鐵拉花精緻。</div>
+        <div class="desc-ja">チェンマイスペシャルティコーヒーの代名詞。高地産アラビカ豆を使用、チャンピオンバリスタによる美しいラテアートが楽しめる。</div>
         <div class="food-tags"><span class="tag must">必訪</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 80–150 ฿</div>
@@ -1317,6 +1330,7 @@
         <div class="food-name">Graph Café<span class="dist-badge"></span></div>
         <div class="food-name-th">古城區老屋咖啡</div>
         <div class="food-desc">改造自百年老屋，植物環繞，WiFi 快、插座多，長期旅人最愛的共工空間。</div>
+        <div class="desc-ja">築100年の古民家を改装。植物に囲まれ、WiFi良好・コンセント多数。長期旅行者に人気のコワーキングスペース。</div>
         <div class="food-tags"><span class="tag veg">蔬食友善</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 80–120 ฿</div>
@@ -1329,6 +1343,7 @@
         <div class="food-name">椰奶南薑雞湯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Tom Kha Gai</span></div>
         <div class="food-name-th">ต้มข่าไก่</div>
         <div class="food-desc">椰奶、南薑、香茅、泰國蘑菇燉雞，酸中帶甜的濃郁湯頭。比 Tom Yum 溫和，是不敢太辣卻想感受泰味的最佳入口。搭白飯吃是清邁家常版本。</div>
+        <div class="desc-ja">ヤシミルク・ガランガル・レモングラス・マッシュルーム入りのチキンスープ。酸味と甘みが絶妙。Tom Yumより辛くなくタイ料理入門にも最適。</div>
         <div class="food-tags"><span class="tag veg">可素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 70–100 ฿</div>
@@ -1340,6 +1355,7 @@
         <div class="food-name">馬薩曼咖哩 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Massaman Curry</span></div>
         <div class="food-name-th">แกงมัสมั่น</div>
         <div class="food-desc">受波斯與印度影響的泰南咖哩，以肉桂、荳蔻、丁香調味，口感濃厚不辣，甜中帶鹹。清邁的版本常用牛肉或雞肉，配烤花生，比 Khao Soi 更少見外國人點。</div>
+        <div class="desc-ja">ペルシャ・インド文化の影響を受けたカレー。シナモン・カルダモン・クローブで風味付け。辛くなくコクのある甘辛い味。外国人観光客がほとんど注文しない通好みの一品。</div>
         <div class="food-tags"><span class="tag must">必試</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 80–120 ฿</div>
@@ -1351,6 +1367,7 @@
         <div class="food-name">沙嗲串燒 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Satay</span></div>
         <div class="food-name-th">สะเต๊ะ</div>
         <div class="food-desc">薑黃醃漬的雞肉或豬肉竹籤炭烤，搭配花生醬和黃瓜醋漬。夜市和週日步行街到處可見推車，5串一份，配花生醬蘸著吃。起源自馬來西亞、清邁版本偏甜。</div>
+        <div class="desc-ja">ターメリック漬けの鶏か豚を竹串に刺して炭火焼き。ピーナッツソースと酢漬けきゅうり添え。夜市や日曜ウォーキングストリートで5本1セット。</div>
         <div class="food-tags"><span class="tag sweet">微甜</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
@@ -1362,6 +1379,7 @@
         <div class="food-name">海南雞飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khao Man Gai</span></div>
         <div class="food-name-th">ข้าวมันไก่</div>
         <div class="food-desc">泰式海南雞飯，雞油炊飯配水煮嫩雞，沾薑味醬油吃。清邁版本常搭酸辣湯，份量扎實，是上班族午餐的第一名選擇。路邊攤版和餐廳版差異不大，選排隊人多那攤準沒錯。</div>
+        <div class="desc-ja">タイ式海南チキンライス。鶏油で炊いたご飯に蒸し鶏をのせ、ショウガ醤油で食べる。チェンマイ版はスパイシースープ付きが多い。行列の多い屋台が正解。</div>
         <div class="food-tags"><span class="tag must">必吃</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 45–60 ฿</div>
@@ -1373,6 +1391,7 @@
         <div class="food-name">泰北酸豬肉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Naem</span></div>
         <div class="food-name-th">แหนม</div>
         <div class="food-desc">自然發酵的生豬肉腸，酸鮮帶勁，清邁特產。直接切片搭炸豬皮吃，或作為湯底（Naem Ngio）。當地人習以為常，外地人初嘗通常反應兩極——但嘗過的人幾乎都愛上。</div>
+        <div class="desc-ja">自然発酵の生豚腸。酸味がありチェンマイの名産品。揚げ豚皮と合わせて食べるか、スープのベース（Naem Ngio）に使う。好みが分かれるが一度食べるとクセになる。</div>
         <div class="food-tags"><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地限定</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 30–60 ฿</div>
@@ -1384,6 +1403,7 @@
         <div class="food-name">泰式奶茶 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Cha Yen</span></div>
         <div class="food-name-th">ชาเย็น</div>
         <div class="food-desc">以錫蘭紅茶沖泡，加入煉乳和淡奶，鮮橙色澤是香料染成。清邁版比曼谷甜度更低，路邊攤現沖版遠勝便利商店瓶裝版。下午3點喝一杯是當地人的固定儀式。</div>
+        <div class="desc-ja">セイロン紅茶に練乳と薄い牛乳を加えた鮮やかなオレンジ色のドリンク。チェンマイ版はバンコクより甘さ控えめ。午後3時の一杯は地元の習慣。</div>
         <div class="food-tags"><span class="tag sweet">甜</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 25–40 ฿</div>
@@ -1395,6 +1415,7 @@
         <div class="food-name">黑芝麻豆腐花 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Tao Hoo Warm</span></div>
         <div class="food-name-th">เต้าหู้อุ่น</div>
         <div class="food-desc">泰式熱豆腐花，淋薑汁糖漿，加黑芝麻。Warorot 市場和古城早市攤販都有。冬天早上喝一碗暖胃，在地人吃早餐的頻率和豆漿差不多，觀光客幾乎不知道。</div>
+        <div class="desc-ja">ショウガシロップと黒ごまをかけた温かい豆腐花。ワロロット市場や旧市街の朝市で見かける。観光客にはほぼ知られていない地元の朝食。</div>
         <div class="food-tags"><span class="tag sweet">甜</span><span class="tag veg">素食</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 20–30 ฿</div>
@@ -1407,6 +1428,7 @@
         <div class="food-name">North Gate Jazz Co-op<span class="dist-badge"></span></div>
         <div class="food-name-th">古城北門旁爵士酒吧</div>
         <div class="food-desc">清邁最知名的現場爵士酒吧，每晚21:00開始演奏，本地樂手輪番上陣。露天半開放空間，在城牆邊喝啤酒聽爵士，是清邁夜晚最有靈魂的一個角落。入場免費，飲料 70 THB 起。</div>
+        <div class="desc-ja">チェンマイで最も有名なジャズライブバー。毎晩21時から地元ミュージシャンが演奏。城壁のそばでビールを飲みながらジャズを聴く、チェンマイの夜で最も魂のある場所。入場無料。</div>
         <div class="food-tags"><span class="tag must">必去</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 70–150 ฿</div>
@@ -1418,6 +1440,7 @@
         <div class="food-name">Zoe in Yellow</div>
         <div class="food-name-th">古城夜生活中心</div>
         <div class="food-desc">清邁背包客夜生活的地標，一整個廣場的露天酒吧和音樂，週末人氣爆棚。適合想融入熱鬧氣氛的夜晚。桌旁的本地啤酒 Chang 一瓶 60 THB，便宜實惠。</div>
+        <div class="desc-ja">バックパッカーのナイトライフの定番スポット。広場全体がオープンエアのバーと音楽で賑わう。週末は特に混雑。地ビール「チャン」1本60バーツ。</div>
         <div class="food-tags"><span class="tag spicy">熱鬧</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 60–120 ฿</div>
@@ -1429,6 +1452,7 @@
         <div class="food-name">Rooftop @ U Nimman<span class="dist-badge"></span></div>
         <div class="food-name-th">尼曼路頂樓酒吧</div>
         <div class="food-desc">尼曼路 U Hotel 頂樓，270度視野俯瞰尼曼街區與遠山。清邁城市夜景最佳觀賞點之一。雞尾酒 250 THB 起，適合和友人慶祝或安靜地看夜景。無需預訂，著裝稍微整齊即可。</div>
+        <div class="desc-ja">ニマン通りのUホテル屋上。270度の眺望でニマン地区と遠山を一望。カクテル250バーツ〜。予約不要、きちんとした服装で。</div>
         <div class="food-tags"><span class="tag sweet">景觀</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●●</span> 250–400 ฿</div>
@@ -1440,6 +1464,7 @@
         <div class="food-name">Good View Riverside Bar</div>
         <div class="food-name-th">Ping河畔現場音樂</div>
         <div class="food-desc">Ping 河邊最老牌的 Live Music 餐廳酒吧，每晚都有現場演奏（泰流行、搖滾、爵士輪替）。戶外座位在河風中聽音樂，附近幾間風格類似，可以邊走邊選喜歡的氛圍。</div>
+        <div class="desc-ja">ピン川沿いの老舗ライブミュージックバー。毎晩タイポップ・ロック・ジャズが交互に演奏。川風を感じながら音楽を楽しめる野外席あり。</div>
         <div class="food-tags"><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地氛圍</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 100–200 ฿</div>
@@ -1451,6 +1476,7 @@
         <div class="food-name">Writer's Club & Wine Bar</div>
         <div class="food-name-th">古城靜謐酒吧</div>
         <div class="food-desc">INFJ/INFP 最愛的那種酒吧：安靜、有書、老歐洲風格。紅酒選擇豐富，適合獨自坐著寫日記或和朋友深聊。音樂不大聲，你可以清楚聽到彼此說話。清邁老派文藝圈的私人據點。</div>
+        <div class="desc-ja">INFJやINFPが好きなタイプの静かなバー。本があり、ヨーロッパ風の雰囲気。ワインが豊富で一人でも深い会話にも最適。音楽は控えめ。チェンマイ文人たちの隠れ家。</div>
         <div class="food-tags"><span class="tag veg">安靜</span><span class="tag must">獨處首選</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 150–300 ฿</div>
@@ -1462,6 +1488,7 @@
         <div class="food-name">Warm Up Café</div>
         <div class="food-name-th">尼曼路 Live Music 大型場地</div>
         <div class="food-desc">清邁最大的 Live Music 夜場，幾個舞台同時進行不同類型音樂。週末人潮洶湧，是想感受當地年輕人夜生活文化的最佳選擇。清邁大學生的週末聚點，凌晨2點後最熱鬧。</div>
+        <div class="desc-ja">チェンマイ最大のライブミュージック会場。複数ステージで異なる音楽が同時進行。週末はチェンマイ大学生が集まる地元若者の聖地。深夜2時以降が最盛期。</div>
         <div class="food-tags"><span class="tag spicy">熱鬧</span><span class="tag local" style="border-color:#4A2010;color:#D4622A">在地人</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 100–200 ฿</div>
@@ -1474,6 +1501,7 @@
         <div class="food-name">豬肉串燒配糯米飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Moo Ping + Khao Niao</span></div>
         <div class="food-name-th">หมูปิ้ง + ข้าวเหนียว</div>
         <div class="food-desc">清邁人最日常的早餐組合。炭火烤豬肉串（蜂蜜醃製），配一盒糯米飯，在路邊站著吃才道地。Pratu Chiang Mai 早市每串 10 THB，一個人 40 THB 吃到飽。</div>
+        <div class="desc-ja">チェンマイ人の最も日常的な朝食コンビ。炭火で焼いた豚串（蜂蜜漬け）ともち米。プラトゥーチェンマイ朝市では1本10バーツ。立ち食いが一番おいしい。</div>
         <div class="food-tags"><span class="tag must">必吃</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
@@ -1485,6 +1513,7 @@
         <div class="food-name">豬雜粥 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Joke Moo</span></div>
         <div class="food-name-th">โจ๊กหมู</div>
         <div class="food-desc">清邁版廣東粥，比曼谷版更濃稠，加豬肝、豬心、薑絲、蔥花。老城區幾間開到凌晨的粥店，深夜喝酒後的收尾最舒服。Joke Prince 是公認第一。</div>
+        <div class="desc-ja">チェンマイ版広東風おかゆ。豚レバー・豚ハツ・ショウガ・ネギ入りでバンコク版より濃厚。深夜の〆にも最適。Joke Princeが定番の人気店。</div>
         <div class="food-tags"><span class="tag must">必試</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 50–70 ฿</div>
@@ -1496,6 +1525,7 @@
         <div class="food-name">泰式吐司配煉乳 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Khanom Pang</span></div>
         <div class="food-name-th">ขนมปังปิ้งชาไทย</div>
         <div class="food-desc">炭烤厚片吐司，抹奶油和煉乳，搭配泰式奶茶（Cha Yen）是清邁人的週末早餐儀式。尼曼路 Soi 9 的無名早餐店，早上8點排隊最長。</div>
+        <div class="desc-ja">炭火で焼いた厚切りトースト。バターと練乳を塗りタイ式アイスティーと合わせるのがチェンマイ流の週末朝食。ニマンSoi 9の無名店は朝8時から行列。</div>
         <div class="food-tags"><span class="tag sweet">甜</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
@@ -1508,6 +1538,7 @@
         <div class="food-name">深夜船麵 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Kuay Tiew Reua</span></div>
         <div class="food-name-th">ก๋วยเตี๋ยวเรือ</div>
         <div class="food-desc">豬血濃湯底，小碗制（一碗約 150ml），正常食量要吃 5–8 碗。Anusarn Market 旁的無名船麵攤，凌晨1點後人最多——清邁夜貓族的深夜儀式。</div>
+        <div class="desc-ja">豚の血入り濃厚スープの船麺。小どんぶり（約150ml）で5〜8杯食べるのが普通。アヌサーン市場そばの屋台は深夜1時以降が最も賑わう夜更かしの儀式。</div>
         <div class="food-tags"><span class="tag spicy">可加辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 15–20 ฿/碗</div>
@@ -1519,6 +1550,7 @@
         <div class="food-name">打拋豬蓋飯 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Pad Kra Pao</span></div>
         <div class="food-name-th">ผัดกระเพราหมูสับไข่ดาว</div>
         <div class="food-desc">泰國人自己最常吃的一道菜，不是給觀光客的。九層塔爆炒豬絞肉加荷包蛋，清邁版本比曼谷更辣。路邊炒飯攤隨時可點，是當地上班族的午餐首選。</div>
+        <div class="desc-ja">タイ人が最もよく食べる料理。ホーリーバジルと豚ひき肉を炒め目玉焼き添え。チェンマイ版はバンコクより辛め。地元サラリーマンの昼食の定番。</div>
         <div class="food-tags"><span class="tag spicy">中辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 50–70 ฿</div>
@@ -1531,6 +1563,7 @@
         <div class="food-name">緬甸薑黃豬肉咖哩 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Gaeng Hang Lay</span></div>
         <div class="food-name-th">แกงฮังเล</div>
         <div class="food-desc">北泰獨有的緬甸風格咖哩，以薑黃、薑、大蒜慢燉豬五花，完全不辣、微甜帶酸。只有清邁以北才有，曼谷幾乎找不到正宗版。配糯米飯最對味。</div>
+        <div class="desc-ja">北タイ独自のミャンマー風カレー。ターメリック・ショウガ・ニンニクで豚バラをじっくり煮込む。全く辛くなく甘酸っぱい。バンコクではほぼ食べられない。もち米と合わせて。</div>
         <div class="food-tags"><span class="tag must">必吃</span><span class="tag veg" style="border-color:#3A2A0A;color:#C89A4A">無辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 60–80 ฿</div>
@@ -1542,6 +1575,7 @@
         <div class="food-name">泰北拉帕 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Laab Muang</span></div>
         <div class="food-name-th">ลาบเมือง</div>
         <div class="food-desc">北泰版豬肉涼拌，與東北版（Isaan）完全不同——不酸、不用檸檬汁，改用豬血和深色香料調味，口感更厚重。清邁在地人早上也吃。Laab Ubol 是公認名店。</div>
+        <div class="desc-ja">北タイ版豚肉サラダ。東北タイ版と全く異なり、酸味なし・豚の血と濃いスパイスで味付け。地元の人は朝から食べる。Laab Ubolが名店として有名。</div>
         <div class="food-tags"><span class="tag spicy">微辣</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 60–90 ฿</div>
@@ -1553,6 +1587,7 @@
         <div class="food-name">清邁烤雞 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Gai Yang Chiang Mai</span></div>
         <div class="food-name-th">ไก่ย่างเชียงใหม่</div>
         <div class="food-desc">清邁風格烤雞比曼谷版醃料更複雜（南薑、香茅、魚露），外皮酥脆、肉汁豐富。Cherng Doi Roast Chicken 是清邁人公認的標竿，店小排隊長。</div>
+        <div class="desc-ja">チェンマイスタイルのグリルチキン。バンコク版より複雑なマリネ（ガランガル・レモングラス・ナンプラー）で皮はカリカリ、肉汁たっぷり。Cherng Doi Roast Chickenが定番。</div>
         <div class="food-tags"><span class="tag must">必試</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 70–120 ฿</div>
@@ -1565,6 +1600,7 @@
         <div class="food-name">印度煎餅配香蕉 <span style="font-weight:400;color:var(--text-muted);font-size:0.8rem">Roti Kluay</span></div>
         <div class="food-name-th">โรตีกล้วย</div>
         <div class="food-desc">現做薄脆煎餅包香蕉，淋上煉乳和巧克力醬。起源於穆斯林社區，清邁夜市和步行街隨處可見推車。一份 40 THB，邊走邊吃的最佳夜市小吃。</div>
+        <div class="desc-ja">バナナ入り薄焼きクレープ。練乳とチョコレートソース添え。ムスリムコミュニティ発祥で夜市には至る所に屋台がある。1個40バーツ、歩きながら食べるのが最高。</div>
         <div class="food-tags"><span class="tag sweet">甜</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●</span> 30–50 ฿</div>
@@ -1577,6 +1613,7 @@
         <div class="food-name">Ponganes Espresso<span class="local-badge" style="background:#1A1A30;color:#8888E8;border-color:#2A2A50">在地人</span></div>
         <div class="food-name-th">尼曼 Soi 9 巷內</div>
         <div class="food-desc">清邁咖啡師圈子的私房推薦，不在 Soi 1 大路上，要走進 Soi 9 才找到。單品豆來自清邁周邊山區，每季換豆，在地咖啡師下班後常來這裡。沒有在 Google 打廣告。</div>
+        <div class="desc-ja">チェンマイのバリスタ界の隠れ家的おすすめ店。ニマンSoi 9の奥にありGoogleで宣伝していない。チェンマイ周辺山岳地帯産のシングルオリジン豆を季節ごとに替えて提供。</div>
         <div class="food-tags"><span class="tag must">必訪</span></div>
       </div>
       <div class="food-price"><span class="price-dot">●●</span> 80–130 ฿</div>
@@ -1684,7 +1721,7 @@
   <div class="phrase-cat">
     <div class="phrase-cat-title">基本禮儀</div>
     <div class="phrase-grid">
-      <div class="phrase-item" onclick="copyPhrase('สวัสดีครับ')"><div class="phrase-zh">你好<span class="phrase-ja" style="display:none;color:#7A8A7A;font-size:0.72rem;display:block">こんにちは</span></div><div class="phrase-th">สวัสดีครับ</div><div class="phrase-rom">サワッディー</div></div>
+      <div class="phrase-item" onclick="copyPhrase('สวัสดีครับ')"><div class="phrase-zh">你好<span class="phrase-ja" style="display:none">こんにちは</span></div><div class="phrase-th">สวัสดีครับ</div><div class="phrase-rom">サワッディー</div></div>
       <div class="phrase-item" onclick="copyPhrase('ขอบคุณครับ')"><div class="phrase-zh">謝謝<span class="phrase-ja" style="display:none">ありがとう</span></div><div class="phrase-th">ขอบคุณครับ</div><div class="phrase-rom">コープクン</div></div>
       <div class="phrase-item" onclick="copyPhrase('ไม่เป็นไร')"><div class="phrase-zh">沒關係<span class="phrase-ja" style="display:none">大丈夫</span></div><div class="phrase-th">ไม่เป็นไร</div><div class="phrase-rom">マイペンライ</div></div>
       <div class="phrase-item" onclick="copyPhrase('ขอโทษครับ')"><div class="phrase-zh">對不起<span class="phrase-ja" style="display:none">すみません</span></div><div class="phrase-th">ขอโทษครับ</div><div class="phrase-rom">コートート</div></div>
@@ -1725,27 +1762,27 @@
   <div class="section-title">實用資訊</div>
   <div class="info-grid">
     <div class="info-card">
-      <div class="info-card-title">緊急聯絡</div>
-      <div class="info-row"><div class="info-key">旅遊警察</div><div class="info-val"><a href="tel:1155">1155</a></div></div>
-      <div class="info-row"><div class="info-key">救護車</div><div class="info-val"><a href="tel:1669">1669</a></div></div>
-      <div class="info-row"><div class="info-key">一般警察</div><div class="info-val"><a href="tel:191">191</a></div></div>
+      <div class="info-card-title">緊急聯絡<span class="desc-ja" style="font-size:0.7rem;color:var(--text-dim);font-weight:400;margin-left:6px">緊急連絡先</span></div>
+      <div class="info-row"><div class="info-key">旅遊警察<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">観光警察</span></div><div class="info-val"><a href="tel:1155">1155</a></div></div>
+      <div class="info-row"><div class="info-key">救護車<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">救急車</span></div><div class="info-val"><a href="tel:1669">1669</a></div></div>
+      <div class="info-row"><div class="info-key">一般警察<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">警察</span></div><div class="info-val"><a href="tel:191">191</a></div></div>
       <div class="info-row"><div class="info-key">Ram Hospital</div><div class="info-val"><a href="tel:+6653920300">+66 53 920 300</a></div></div>
-      <div class="info-row"><div class="info-key">台灣辦事處</div><div class="info-val"><a href="tel:+6622507130">+66 2 250 7130</a></div></div>
+      <div class="info-row"><div class="info-key">台灣辦事處<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">台湾事務所</span></div><div class="info-val"><a href="tel:+6622507130">+66 2 250 7130</a></div></div>
     </div>
     <div class="info-card">
-      <div class="info-card-title">交通費用參考</div>
-      <div class="info-row"><div class="info-key">Grab 市區</div><div class="info-val">60–120 THB</div></div>
-      <div class="info-row"><div class="info-key">紅色雙排車</div><div class="info-val">30–50 THB/人</div></div>
-      <div class="info-row"><div class="info-key">摩托計程車</div><div class="info-val">40–80 THB</div></div>
-      <div class="info-row"><div class="info-key">機場到古城</div><div class="info-val">120–180 THB</div></div>
-      <div class="info-row"><div class="info-key">租摩托車/日</div><div class="info-val">150–300 THB</div></div>
+      <div class="info-card-title">交通費用參考<span class="desc-ja" style="font-size:0.7rem;color:var(--text-dim);font-weight:400;margin-left:6px">交通費の目安</span></div>
+      <div class="info-row"><div class="info-key">Grab 市區<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">市内Grab</span></div><div class="info-val">60–120 THB</div></div>
+      <div class="info-row"><div class="info-key">紅色雙排車<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">赤いソンテウ</span></div><div class="info-val">30–50 THB/人</div></div>
+      <div class="info-row"><div class="info-key">摩托計程車<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">バイクタクシー</span></div><div class="info-val">40–80 THB</div></div>
+      <div class="info-row"><div class="info-key">機場到古城<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">空港→旧市街</span></div><div class="info-val">120–180 THB</div></div>
+      <div class="info-row"><div class="info-key">租摩托車/日<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">バイクレンタル/日</span></div><div class="info-val">150–300 THB</div></div>
     </div>
     <div class="info-card">
-      <div class="info-card-title">清邁機場 (CNX)</div>
-      <div class="info-row"><div class="info-key">ICAO 代碼</div><div class="info-val">VTCC</div></div>
-      <div class="info-row"><div class="info-key">市區距離</div><div class="info-val">約 3 km</div></div>
-      <div class="info-row"><div class="info-key">SIM 卡</div><div class="info-val">入境大廳有售</div></div>
-      <div class="info-row"><div class="info-key">換錢</div><div class="info-val">機場匯率差，建議少換</div></div>
+      <div class="info-card-title">清邁機場 (CNX)<span class="desc-ja" style="font-size:0.7rem;color:var(--text-dim);font-weight:400;margin-left:6px">チェンマイ空港</span></div>
+      <div class="info-row"><div class="info-key">ICAO 代碼<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">ICAOコード</span></div><div class="info-val">VTCC</div></div>
+      <div class="info-row"><div class="info-key">市區距離<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">市街まで</span></div><div class="info-val">約 3 km</div></div>
+      <div class="info-row"><div class="info-key">SIM 卡<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">SIMカード</span></div><div class="info-val">入境大廳有售<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">（到着ロビーで購入可）</span></div></div>
+      <div class="info-row"><div class="info-key">換錢<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">両替</span></div><div class="info-val">機場匯率差，建議少換<span class="desc-ja" style="display:none;font-size:0.68rem;color:var(--text-dim)">（空港は不利、市内で両替推奨）</span></div></div>
     </div>
   </div>
 
@@ -2011,8 +2048,14 @@
   function toggleJa() {
     var btn = document.getElementById('lang-toggle');
     document.body.classList.toggle('show-ja');
+    var jaOn = document.body.classList.contains('show-ja');
     btn.classList.toggle('active');
-    btn.textContent = document.body.classList.contains('show-ja') ? '🇯🇵 ON' : '🇯🇵 JP';
+    btn.textContent = jaOn ? '🇯🇵 ON' : '🇯🇵 JP';
+    // sync phrase section toggle
+    phraseJaOn = jaOn;
+    document.querySelectorAll('.phrase-ja').forEach(function(s){ s.style.display = jaOn ? 'block' : 'none'; });
+    var pb = document.getElementById('phrase-lang-btn');
+    if (pb) pb.textContent = jaOn ? '🇯🇵 隱藏日文' : '🇯🇵 顯示日文';
   }
 
   // JAPANESE PHRASES
