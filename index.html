@@ -397,6 +397,25 @@
     margin: 8px 0 0;
   }
 
+  /* TIME-OF-DAY PERIOD LABELS */
+  .time-period {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    padding: 10px 0 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .time-period::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .time-period:first-child { padding-top: 0; }
+
   /* FOOD */
   .food-filter {
     display: flex;
@@ -850,6 +869,7 @@
       </div>
     </div>
     <div class="place-list">
+      <div class="time-period">🌅 早上</div>
       <div class="place-item food" data-lat="18.7758" data-lng="98.9871" data-moods="local quiet">
         <button class="fav-btn" onclick="openDayPicker(this,'Pratu晨市','place')">☆</button>
         <div class="place-time">07:00</div>
@@ -906,6 +926,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Wat+Phra+Singh+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">☀️ 下午</div>
       <div class="place-item food" data-lat="18.7885" data-lng="98.9881" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'Aroon Rai','place')">☆</button>
         <div class="place-time">12:30</div>
@@ -930,6 +951,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Santitham+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">🌙 晚上</div>
       <div class="place-item market" data-lat="18.7735" data-lng="98.9868" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'Wualai週日夜市','place')">☆</button>
         <div class="place-time">18:00</div>
@@ -955,6 +977,7 @@
       </div>
     </div>
     <div class="place-list">
+      <div class="time-period">🌅 早上</div>
       <div class="place-item temple" data-lat="18.8048" data-lng="98.9217" data-moods="history nature">
         <button class="fav-btn" onclick="openDayPicker(this,'素帖寺','place')">☆</button>
         <div class="place-time">07:00</div>
@@ -983,6 +1006,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Doi+Suthep+Waterfall+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">☀️ 下午</div>
       <div class="place-item nature" data-lat="18.8267" data-lng="98.9267" data-moods="nature local quiet">
         <button class="fav-btn" onclick="openDayPicker(this,'懷通濤水庫','place')">☆</button>
         <div class="place-time">13:00</div>
@@ -1007,6 +1031,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Nimman+Road+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">🌙 晚上</div>
       <div class="place-item hidden" data-lat="18.7958" data-lng="98.9661" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'Nimman Soi7炒河粉','place')">☆</button>
         <div class="place-time">19:30</div>
@@ -1032,6 +1057,7 @@
       </div>
     </div>
     <div class="place-list">
+      <div class="time-period">🐘 全天行程</div>
       <div class="place-item activity" data-lat="19.0833" data-lng="98.9167" data-moods="nature ethical">
         <button class="fav-btn" onclick="openDayPicker(this,'大象自然公園','place')">☆</button>
         <div class="place-time">全天</div>
@@ -1048,6 +1074,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Elephant+Nature+Park+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">🌙 晚上</div>
       <div class="place-item hidden" data-lat="18.8467" data-lng="99.0200" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'San Sai豬腳飯','place')">☆</button>
         <div class="place-time">回程</div>
@@ -1085,6 +1112,7 @@
       </div>
     </div>
     <div class="place-list">
+      <div class="time-period">🌅 早上</div>
       <div class="place-item activity" data-lat="18.8133" data-lng="98.9383" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'泰式烹飪課','place')">☆</button>
         <div class="place-time">09:00</div>
@@ -1097,6 +1125,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Thai+Farm+Cooking+School+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">☀️ 下午</div>
       <div class="place-item hidden" data-lat="18.6833" data-lng="98.9500" data-moods="local ethical">
         <button class="fav-btn" onclick="openDayPicker(this,'Baan Tawai手工藝村','place')">☆</button>
         <div class="place-time">14:00</div>
@@ -1125,6 +1154,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Ping+River+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">🌙 晚上</div>
       <div class="place-item market" data-lat="18.7944" data-lng="98.9531" data-moods="local quiet">
         <button class="fav-btn" onclick="openDayPicker(this,'CMU週六夜市','place')">☆</button>
         <div class="place-time">17:00</div>
@@ -1150,6 +1180,7 @@
       </div>
     </div>
     <div class="place-list">
+      <div class="time-period">🌅 早上</div>
       <div class="place-item hidden" data-lat="18.7944" data-lng="98.9600" data-moods="local quiet solo">
         <button class="fav-btn" onclick="openDayPicker(this,'Ton Payom早市','place')">☆</button>
         <div class="place-time">07:30</div>
@@ -1174,6 +1205,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Lila+Thai+Massage+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">☀️ 下午</div>
       <div class="place-item market" data-lat="18.7928" data-lng="99.0017" data-moods="local">
         <button class="fav-btn" onclick="openDayPicker(this,'Warorot市場','place')">☆</button>
         <div class="place-time">13:00</div>
@@ -1186,6 +1218,7 @@
         </div>
         <a class="place-map" href="https://maps.google.com/?q=Warorot+Market+Chiang+Mai" target="_blank">地圖↗</a>
       </div>
+      <div class="time-period">🌆 傍晚</div>
       <div class="place-item food">
         <div class="place-time">17:00</div>
         <button class="fav-btn" onclick="openDayPicker(this,'最後一碗咖哩麵','place')">☆</button>
