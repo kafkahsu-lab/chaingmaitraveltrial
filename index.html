@@ -319,6 +319,8 @@
   .mood-filter-btn { flex-shrink:0; padding:5px 12px; border-radius:16px; border:1px solid var(--border); background:transparent; color:var(--text-muted); font-size:0.72rem; cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
   .mood-filter-btn.active { background:var(--surface-2); border-color:var(--border-light); color:var(--text); }
   .mood-filter-btn:focus-visible { outline:2px solid var(--gold); }
+  .btn-ja { display:none; font-size:0.58rem; color:#7A8A7A; line-height:1.2; margin-top:1px; }
+  body.show-ja .btn-ja { display:block; }
 
   /* PLAN SUB-TABS */
   .plan-subtabs { display:flex; gap:0; margin:10px 20px 0; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
@@ -743,6 +745,9 @@
     <div style="font-family:Georgia,serif;font-size:1.15rem;color:var(--text);line-height:1.5;max-width:320px">
       蘭納王朝的千年古都，寺廟、叢林、<br>夜市與咖啡香交織的南亞慢活之城。
     </div>
+    <div class="desc-ja" style="font-family:Georgia,serif;font-size:0.82rem;color:#7A8A7A;line-height:1.6;margin-top:8px;max-width:320px">
+      ランナー王朝の千年の古都。寺院、ジャングル、<br>夜市とコーヒーの香りが交差するアジアの緩やかな城。
+    </div>
     <div class="trip-stats">
       <div class="stat-card">
         <div class="val" id="stat-days">5</div>
@@ -852,13 +857,13 @@
   </div>
 
   <div class="mood-filter">
-    <button class="mood-filter-btn active" onclick="filterMood('all',this)">全部</button>
-    <button class="mood-filter-btn" onclick="filterMood('quiet',this)">🤫 靜思型</button>
-    <button class="mood-filter-btn" onclick="filterMood('history',this)">🕯 歷史感</button>
-    <button class="mood-filter-btn" onclick="filterMood('nature',this)">🌿 自然系</button>
-    <button class="mood-filter-btn" onclick="filterMood('local',this)">🏮 在地人</button>
-    <button class="mood-filter-btn" onclick="filterMood('solo',this)">🧘 獨處向</button>
-    <button class="mood-filter-btn" onclick="filterMood('ethical',this)">💚 倫理性</button>
+    <button class="mood-filter-btn active" onclick="filterMood('all',this)">全部<span class="btn-ja">すべて</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('quiet',this)">🤫 靜思型<span class="btn-ja">静かに</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('history',this)">🕯 歷史感<span class="btn-ja">歴史好き</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('nature',this)">🌿 自然系<span class="btn-ja">自然派</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('local',this)">🏮 在地人<span class="btn-ja">地元民風</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('solo',this)">🧘 獨處向<span class="btn-ja">ひとり旅</span></button>
+    <button class="mood-filter-btn" onclick="filterMood('ethical',this)">💚 倫理性<span class="btn-ja">エシカル</span></button>
   </div>
 
   <div class="day-block">
@@ -1248,14 +1253,14 @@
 <!-- 3. FOOD -->
 <div class="section" id="sec-food">
   <div class="food-filter">
-    <button class="filter-btn active" onclick="filterFood('all',this)">全部</button>
-    <button class="filter-btn" onclick="filterFood('north',this)">北泰料理</button>
-    <button class="filter-btn" onclick="filterFood('street',this)">街頭小吃</button>
-    <button class="filter-btn" onclick="filterFood('breakfast',this)">早餐</button>
-    <button class="filter-btn" onclick="filterFood('late',this)">深夜</button>
-    <button class="filter-btn" onclick="filterFood('dessert',this)">甜點</button>
-    <button class="filter-btn" onclick="filterFood('cafe',this)">咖啡</button>
-    <button class="filter-btn" onclick="filterFood('bar',this)">🍺 酒吧</button>
+    <button class="filter-btn active" onclick="filterFood('all',this)">全部<span class="btn-ja">すべて</span></button>
+    <button class="filter-btn" onclick="filterFood('north',this)">北泰料理<span class="btn-ja">北部タイ料理</span></button>
+    <button class="filter-btn" onclick="filterFood('street',this)">街頭小吃<span class="btn-ja">屋台グルメ</span></button>
+    <button class="filter-btn" onclick="filterFood('breakfast',this)">早餐<span class="btn-ja">朝ごはん</span></button>
+    <button class="filter-btn" onclick="filterFood('late',this)">深夜<span class="btn-ja">深夜食堂</span></button>
+    <button class="filter-btn" onclick="filterFood('dessert',this)">甜點<span class="btn-ja">スイーツ</span></button>
+    <button class="filter-btn" onclick="filterFood('cafe',this)">咖啡<span class="btn-ja">カフェ</span></button>
+    <button class="filter-btn" onclick="filterFood('bar',this)">🍺 酒吧<span class="btn-ja">バー</span></button>
   </div>
   <div class="food-list" id="food-list">
 
