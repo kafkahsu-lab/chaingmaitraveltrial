@@ -1675,32 +1675,32 @@
 <div class="section" id="sec-budget">
 
   <div class="budget-summary">
-    <div class="budget-total-label">總花費（THB）</div>
+    <div class="budget-total-label">總花費（THB）<span class="desc-ja" style="font-size:0.68rem;margin-left:6px;font-style:normal">合計支出</span></div>
     <div class="budget-total-val"><span>฿ </span><span id="total-thb">0</span></div>
     <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">≈ NT$ <span id="total-twd">0</span></div>
     <div class="budget-bars">
       <div class="budget-bar-row">
-        <div class="budget-bar-label">食物</div>
+        <div class="budget-bar-label">食物<span class="desc-ja" style="font-size:0.6rem;font-style:normal;display:none">食事</span></div>
         <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-food" style="width:0%;background:var(--orange)"></div></div>
         <div class="budget-bar-amt" id="lbl-food">0 ฿</div>
       </div>
       <div class="budget-bar-row">
-        <div class="budget-bar-label">交通</div>
+        <div class="budget-bar-label">交通<span class="desc-ja" style="font-size:0.6rem;font-style:normal;display:none">交通</span></div>
         <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-trans" style="width:0%;background:var(--teal)"></div></div>
         <div class="budget-bar-amt" id="lbl-trans">0 ฿</div>
       </div>
       <div class="budget-bar-row">
-        <div class="budget-bar-label">景點</div>
+        <div class="budget-bar-label">景點<span class="desc-ja" style="font-size:0.6rem;font-style:normal;display:none">観光</span></div>
         <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-sight" style="width:0%;background:var(--gold)"></div></div>
         <div class="budget-bar-amt" id="lbl-sight">0 ฿</div>
       </div>
       <div class="budget-bar-row">
-        <div class="budget-bar-label">購物</div>
+        <div class="budget-bar-label">購物<span class="desc-ja" style="font-size:0.6rem;font-style:normal;display:none">ショッピング</span></div>
         <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-shop" style="width:0%;background:#9B6FC8"></div></div>
         <div class="budget-bar-amt" id="lbl-shop">0 ฿</div>
       </div>
       <div class="budget-bar-row">
-        <div class="budget-bar-label">其他</div>
+        <div class="budget-bar-label">其他<span class="desc-ja" style="font-size:0.6rem;font-style:normal;display:none">その他</span></div>
         <div class="budget-bar-track"><div class="budget-bar-fill" id="bar-other" style="width:0%;background:var(--green-light)"></div></div>
         <div class="budget-bar-amt" id="lbl-other">0 ฿</div>
       </div>
@@ -1708,7 +1708,7 @@
   </div>
 
   <div class="converter-box">
-    <div class="converter-title">泰銖 ↔ 台幣 換算</div>
+    <div class="converter-title">泰銖 ↔ 台幣 換算<span class="desc-ja" style="font-size:0.65rem;font-style:normal;display:none;margin-left:6px">バーツ ↔ 台湾元</span></div>
     <div class="converter-row">
       <div class="converter-input-wrap">
         <div class="converter-label">泰銖 THB</div>
@@ -1735,7 +1735,7 @@
   </div>
 
   <div class="expense-form">
-    <div class="expense-form-title">新增花費</div>
+    <div class="expense-form-title">新增花費<span class="desc-ja" style="font-size:0.68rem;font-style:normal;display:none;margin-left:6px;color:#7A8A7A">支出を追加</span></div>
     <div class="form-row">
       <input type="text" class="form-input" id="exp-desc" placeholder="花費說明（例：午餐咖哩麵）">
     </div>
@@ -1749,12 +1749,12 @@
         <option value="other">其他</option>
       </select>
     </div>
-    <button class="btn-add" onclick="addExpense()">新增</button>
+    <button class="btn-add" onclick="addExpense()">新增<span class="btn-ja">追加</span></button>
   </div>
 
-  <div class="section-title" style="padding-top:12px">花費記錄</div>
+  <div class="section-title" style="padding-top:12px">花費記錄<span class="desc-ja" style="font-size:0.72rem;font-style:normal;display:none;margin-left:6px">支出履歴</span></div>
   <div class="expense-list" id="expense-list">
-    <div style="text-align:center;padding:20px;color:var(--text-dim);font-size:0.82rem">尚無花費記錄</div>
+    <div style="text-align:center;padding:20px;color:var(--text-dim);font-size:0.82rem">尚無花費記錄<span class="desc-ja" style="font-size:0.75rem;font-style:normal;display:none;margin-left:4px">（まだ記録なし）</span></div>
   </div>
 </div>
 
@@ -1835,7 +1835,7 @@
     </div>
   </div>
 
-  <div class="section-title">行李清單</div>
+  <div class="section-title">行李清單<span class="desc-ja" style="font-size:0.72rem;font-style:normal;display:none;margin-left:6px">荷物チェックリスト</span></div>
   <div class="pack-list" id="pack-list">
   </div>
   <div style="padding:12px 20px 4px;font-size:0.72rem;color:var(--text-dim)">點擊勾選已打包</div>
@@ -1866,7 +1866,7 @@
   </button>
 </nav>
 
-<div class="phrase-copied" id="copy-toast">已複製泰文</div>
+<div class="phrase-copied" id="copy-toast">已複製泰文<span class="desc-ja" style="font-size:0.7rem;font-style:normal;display:none;margin-left:4px">（タイ語コピー済）</span></div>
 
 <script>
   // TAB NAVIGATION
@@ -2169,6 +2169,22 @@
     btn.classList.add('active');
     document.querySelectorAll('.place-item[data-moods]').forEach(function(el) {
       el.style.display = (mood === 'all' || el.dataset.moods.indexOf(mood) !== -1) ? '' : 'none';
+    });
+    // Hide time-period headers when all items below them are filtered out
+    document.querySelectorAll('.place-list').forEach(function(list) {
+      var children = list.children;
+      for (var i = 0; i < children.length; i++) {
+        if (children[i].classList.contains('time-period')) {
+          var hasVisible = false;
+          for (var j = i + 1; j < children.length; j++) {
+            if (children[j].classList.contains('time-period')) break;
+            if (children[j].classList.contains('place-item') && children[j].style.display !== 'none') {
+              hasVisible = true; break;
+            }
+          }
+          children[i].style.display = hasVisible ? '' : 'none';
+        }
+      }
     });
   }
 
